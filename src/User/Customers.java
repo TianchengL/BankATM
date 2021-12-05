@@ -2,11 +2,19 @@ package User;
 
 import java.sql.*;
 
-public class Customers extends Users {
+public class Customers extends User {
+
+
+    public Customers(int id, String firstname, String lastname) {
+        super(id, firstname, lastname);
+    }
+
     public void insert(){
         // SQL statement for inserting
-        String sql1 = "INSERT INTO loginInfo (username, password) VALUES ('" + this.getUsername() + "', '" + this.getPassword() + "');";
-        String sql2 = "INSERT INTO customerInfo (name, username, address) VALUES ('" + this.getName() + "', '" + this.getUsername() + "', '" + this.getAddress() + "');";
+        String sql1 = "INSERT INTO loginInfo (username, password) VALUES ('" + this.getUsername() + "', '"
+                + this.getPassword() + "');";
+        String sql2 = "INSERT INTO customerInfo (name, username, address) VALUES ('" + this.getName() + "', '"
+                + this.getUsername() + "', '" + this.getAddress() + "');";
         ExecuteSqlCommand.executeCommand(sql1);
         ExecuteSqlCommand.executeCommand(sql2);
     }
