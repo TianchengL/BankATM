@@ -1,3 +1,5 @@
+import GUI.WelcomeFrame;
+
 import javax.swing.*;
 
 public class Welcome {
