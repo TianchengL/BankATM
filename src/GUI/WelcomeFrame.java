@@ -1,21 +1,28 @@
 package GUI;
 
+import Database.Database;
 import LoginOrSignUp.Login;
 import LoginOrSignUp.SignUp;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WelcomeFrame extends JFrame implements ActionListener {
-    Container container = getContentPane();
-    JLabel welcomeLabel = new JLabel("Bank ATM");
-    JButton loginButton = new JButton("LoginOrSignUp");
-    JButton createButton = new JButton("Create Account.Account");
+
+    private final Container container;
+    private final JLabel welcomeLabel;
+    private final JButton loginButton;
+    private final JButton createButton;
 
 
     public WelcomeFrame() {
+        container = getContentPane();
+        welcomeLabel = new JLabel("Bank ATM");
+        loginButton = new JButton("LoginOrSignUp");
+        createButton = new JButton("Create Account.Account");
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
@@ -49,11 +56,32 @@ public class WelcomeFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
-            Login.login();
+
+            LoginFrame frame=new LoginFrame();
+            frame.setTitle("Login.Login Form");
+            frame.setVisible(true);
+            frame.setBounds(10,10,600,600);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setResizable(false);
         }
         else if(e.getSource() == createButton) {
-            SignUp.signUp();
+
+            //Database.clearTable("user");
+//            Database.dropTable("user");
+//            Database.dropTable("loginInfo");
+            SignupFrame frame=new SignupFrame();
+
         }
+    }
+
+    public static void main(String[] args)  {
+        Database database = new Database();
+        WelcomeFrame frame=new WelcomeFrame();
+        frame.setTitle("Welcome Form");
+        frame.setBounds(10,10,600,600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setResizable(false);
+        frame.setVisible(true);
     }
 
 }

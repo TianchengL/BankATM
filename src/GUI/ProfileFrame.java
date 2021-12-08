@@ -32,12 +32,12 @@ public class ProfileFrame extends JFrame implements ActionListener {
         setLocationAndSize();
         addComponentsToContainer();
         addActionEvent();
-        customer = Customers.retrieveCustomer(username);
-//        System.out.println(customer.getName());
-        name.setText(customer.getName());
-        uname.setText(customer.getUsername());
-        address.setText(customer.getAddress());
-        password.setText(customer.getPassword());
+//        customer = Customers.retrieveCustomer(username);
+////        System.out.println(customer.getName());
+//        name.setText(customer.getName());
+//        uname.setText(customer.getUsername());
+//        address.setText(customer.getAddress());
+//        password.setText(customer.getPassword());
     }
 
     public void setLayoutManager() {
@@ -94,10 +94,10 @@ public class ProfileFrame extends JFrame implements ActionListener {
             else{
 //                customer.setPassword(newPwd);
 //                this.updatePassword();
-                customer.updatePassword(newPwd);
-                JOptionPane.showMessageDialog(this, "Password Updated");
-                password.setText(customer.getPassword());
-                newPwdField.setText("");
+//                customer.updatePassword(newPwd);
+//                JOptionPane.showMessageDialog(this, "Password Updated");
+//                password.setText(customer.getPassword());
+//                newPwdField.setText("");
             }
         }
         //Coding Part of return button
@@ -110,7 +110,7 @@ public class ProfileFrame extends JFrame implements ActionListener {
 //        String sql = "UPDATE loginInfo "
 //                + "SET password = '" + customer.getPassword() + "'"
 //                + " WHERE username = '" + customer.getUsername() + "';";
-//        User.ExecuteSqlCommand.executeCommand(sql);
+//        Database.ExecuteSqlCommand.executeCommand(sql);
 //    }
 
 }

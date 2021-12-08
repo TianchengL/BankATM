@@ -1,19 +1,31 @@
 package User;
 
 public abstract class User {
-    private String firstname, lastname;
+    private final String firstname;
+    private final String lastname;
     private int id;
     private String address;
 
-    public User(int id, String firstname, String lastname){
-        this.id = id;
+    public enum UserType{ CUSTOMER, MANAGER}
+
+    abstract UserType getType();
+
+    public User(String firstname, String lastname){
         this.firstname = firstname;
         this.lastname = lastname;
     }
 
-    public User(int id, String firstname, String lastname, String address){
-        this(id, firstname, lastname);
+    public User(String firstname, String lastname, String address){
+        this(firstname, lastname);
         this.address = address;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     public int getId() {
@@ -32,6 +44,5 @@ public abstract class User {
         this.address = address;
     }
 
-    public abstract void insert();
 
 }
