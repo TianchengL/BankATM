@@ -63,8 +63,6 @@ public class SignupFrame extends JFrame implements ActionListener{
                 SignUp signUp = new SignUp(firstname, lastname, userName, User.UserType.CUSTOMER, pw, pc);
                 signUp.addUser();
 
-
-
                 JOptionPane.showMessageDialog(this,
                         "Account.Account created! Please login to your account");
                 dispose();

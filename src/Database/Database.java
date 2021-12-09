@@ -72,28 +72,55 @@ public class Database {
                            username text NOT NULL,
                            password text NOT NULL,
                            userId integer,
+                           userType text NOT NULL,
                            FOREIGN KEY(userId) references user(id)
                            );""";
         executeCommand(sql);
     }
 
+    //insert credential info into loginInfo table
     public static void addToCredentialTable(User user, String username, String password){
-        String sql =  "INSERT INTO loginInfo (username, password, userId) VALUES ('" +
-                username + "', '" + password + "', '" + user.getId() + "');";
+        String type = "";
+        if(user.getType() == User.UserType.MANAGER){
+            type = "Manager";
+        }else {
+            type = "Customer";
+        }
+        String sql =  "INSERT INTO loginInfo (username, password, userId, userType) VALUES ('" +
+                username + "', '" + password + "', '" + user.getId() + "', '" + type + "');";
         executeCommand(sql);
     }
 
-    //clear out the specified table
-    public static void clearTable(String tableName){
-        String sql = "DELETE from " + tableName;
-        executeCommand(sql);
+    //return user type by checking username
+    public static String getUserType(String username){
+        String sql = "SELECT * FROM loginInfo WHERE username = '" + username + "'";
+        String res = "";
+        try (Connection conn = DriverManager.getConnection(dbURL);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql))
+        {
+            res = rs.getString("userType");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return res;
     }
 
-    public static void dropTable(String name){
-        String sql = "DROP table " + name;
-        executeCommand(sql);
+    //check if input username exist in database
+    //return password if user in the database, empty otherwise
+    public static String checkUserExist(String username){
+        String sql = "SELECT * FROM loginInfo WHERE username = '" + username + "'";
+        String res = "";
+        try (Connection conn = DriverManager.getConnection(dbURL);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql))
+        {
+            res = rs.getString("password");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return res;
     }
-
 
     private static void executeCommand(String sql){
 

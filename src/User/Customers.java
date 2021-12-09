@@ -10,7 +10,7 @@ public class Customers extends User {
     }
 
     @Override
-    UserType getType() {
+    public UserType getType() {
         return UserType.CUSTOMER;
     }
 

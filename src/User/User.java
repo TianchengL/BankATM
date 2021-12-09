@@ -8,7 +8,7 @@ public abstract class User {
 
     public enum UserType{ CUSTOMER, MANAGER}
 
-    abstract UserType getType();
+    public abstract UserType getType();
 
     public User(String firstname, String lastname){
         this.firstname = firstname;

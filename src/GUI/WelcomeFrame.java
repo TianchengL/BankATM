@@ -3,6 +3,7 @@ package GUI;
 import Database.Database;
 import LoginOrSignUp.Login;
 import LoginOrSignUp.SignUp;
+import User.User;
 
 import javax.swing.*;
 import javax.xml.crypto.Data;
@@ -58,11 +59,11 @@ public class WelcomeFrame extends JFrame implements ActionListener {
         if (e.getSource() == loginButton) {
 
             LoginFrame frame=new LoginFrame();
-            frame.setTitle("Login.Login Form");
-            frame.setVisible(true);
-            frame.setBounds(10,10,600,600);
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.setResizable(false);
+//            frame.setTitle("Login.Login Form");
+//            frame.setVisible(true);
+//            frame.setBounds(10,10,600,600);
+//            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//            frame.setResizable(false);
         }
         else if(e.getSource() == createButton) {
 
@@ -76,6 +77,10 @@ public class WelcomeFrame extends JFrame implements ActionListener {
 
     public static void main(String[] args)  {
         Database database = new Database();
+        //default manager
+//        SignUp signUp = new SignUp("Cristine", "CPK", "boss",
+//                User.UserType.MANAGER, "123", "123");
+//        signUp.addUser();
         WelcomeFrame frame=new WelcomeFrame();
         frame.setTitle("Welcome Form");
         frame.setBounds(10,10,600,600);

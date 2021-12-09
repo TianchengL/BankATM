@@ -8,7 +8,7 @@ public class BankManager extends User {
 
 
     @Override
-    UserType getType() {
+    public UserType getType() {
         return UserType.MANAGER;
     }
 
