@@ -2,7 +2,7 @@ package LoginOrSignUp;
 
 import Database.Database;
 import User.*;
-
+import Collection.CollectionArrays;
 
 public class SignUp {
 
@@ -27,18 +27,20 @@ public class SignUp {
         User user;
         int id = -1;
         if(type == User.UserType.MANAGER){
-            user = new BankManager(this.firstName, this.lastName);
+            user = new BankManager(this.firstName, this.lastName, this.userName);
             Database.addUser(user);
             id = Database.getUserId();
             user.setId(id);
             //add credential info into credential table
             Database.addToCredentialTable(user, userName, password);
+            CollectionArrays.addUser(user);
         }else if(type == User.UserType.CUSTOMER){
-            user = new Customers(this.firstName, this.lastName);
+            user = new Customers(this.firstName, this.lastName, this.userName);
             Database.addUser(user);
             id = Database.getUserId();
             user.setId(id);
             Database.addToCredentialTable(user, userName, password);
+            CollectionArrays.addUser(user);
         }
     }
 
@@ -46,6 +48,8 @@ public class SignUp {
    /** Might need to provide some method to check if input password meet some constraints
     * such as at least one Capital letter. ect...**/
 
+
+    //Added condition to check this during signup
     //check if password and confirm password the same
     //return true if its same
     public boolean checkPassword(){
