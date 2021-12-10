@@ -20,10 +20,15 @@ public class WelcomeFrame extends JFrame implements ActionListener {
 
 
     public WelcomeFrame() {
+        setTitle("Welcome Form");
+        setVisible(true);
+        setBounds(10,10,600,600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setResizable(false);
         container = getContentPane();
         welcomeLabel = new JLabel("Bank ATM");
-        loginButton = new JButton("LoginOrSignUp");
-        createButton = new JButton("Create Account.Account");
+        loginButton = new JButton("Login");
+        createButton = new JButton("Create Account");
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
@@ -58,7 +63,7 @@ public class WelcomeFrame extends JFrame implements ActionListener {
         //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
 
-            LoginFrame frame=new LoginFrame();
+            LoginFrame.main();
 //            frame.setTitle("Login.Login Form");
 //            frame.setVisible(true);
 //            frame.setBounds(10,10,600,600);
@@ -70,23 +75,25 @@ public class WelcomeFrame extends JFrame implements ActionListener {
             //Database.clearTable("user");
 //            Database.dropTable("user");
 //            Database.dropTable("loginInfo");
-            SignupFrame frame=new SignupFrame();
+            SignupFrame.main();
 
         }
     }
 
-    public static void main(String[] args)  {
-        Database database = new Database();
+    public static void welcome()  {
+//        Database database = new Database();
+//        Database.addPreviousUsers();
         //default manager
 //        SignUp signUp = new SignUp("Cristine", "CPK", "boss",
 //                User.UserType.MANAGER, "123", "123");
 //        signUp.addUser();
-        WelcomeFrame frame=new WelcomeFrame();
-        frame.setTitle("Welcome Form");
-        frame.setBounds(10,10,600,600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setResizable(false);
-        frame.setVisible(true);
+//        WelcomeFrame frame=new WelcomeFrame();
+//        frame.setTitle("Welcome Form");
+//        frame.setBounds(10,10,600,600);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        //frame.setResizable(false);
+//        frame.setVisible(true);
+        new WelcomeFrame();
     }
 
 }

@@ -6,19 +6,33 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CustomerAccountFrame extends JFrame implements ActionListener {
-    String username;
-    Container container = getContentPane();
-    JLabel userLabel = new JLabel();
-    JButton accountButton = new JButton("Check your accounts");
-    JButton checkTransactionButton = new JButton("View transactions");
-    JButton profileButton = new JButton("GUI.Profile");
-    JButton createAccountButton = new JButton("Create a checkings/savings account");
-    JButton loanButton = new JButton("Request Loan");
-    JButton makeTransactionButton = new JButton("Make transaction");
-    JButton logoutButton = new JButton("Logout");
+    private final String username;
+    private final Container container;
+    private final JLabel userLabel;
+    private final JButton accountButton;
+    private final JButton checkTransactionButton;
+    private final JButton profileButton;
+    private final JButton createAccountButton;
+    private final JButton loanButton;
+    private final JButton makeTransactionButton;
+    private final JButton logoutButton;
 
 
     public CustomerAccountFrame(String username) {
+        setTitle("Customer Account Form");
+        setVisible(true);
+        setBounds(10,10,600,600);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        container = getContentPane();
+        userLabel = new JLabel();
+        accountButton = new JButton("Check your accounts");
+        checkTransactionButton = new JButton("View transactions");
+        profileButton = new JButton("Profile");
+        createAccountButton = new JButton("Create a checkings/savings account");
+        loanButton = new JButton("Request Loan");
+        makeTransactionButton = new JButton("Make transaction");
+        logoutButton = new JButton("Logout");
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
@@ -69,7 +83,7 @@ public class CustomerAccountFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
         if (e.getSource() == profileButton) {
-            Profile.getProfile(username);
+            ProfileFrame.getProfile(username);
         }
         if (e.getSource() == accountButton) {
 
@@ -92,30 +106,8 @@ public class CustomerAccountFrame extends JFrame implements ActionListener {
         }
     }
 
-//    public String selectPassword(String userText){
-//        String sql = "SELECT * "
-//                + "FROM loginInfo WHERE username = '" + userText + "'";
-//        String url = "jdbc:sqlite:bankAtm.db";
-//        try (Connection conn = DriverManager.getConnection(url);
-//             Statement stmt  = conn.createStatement();
-//             ResultSet rs    = stmt.executeQuery(sql)){
-//
-////            // set the value
-////            pstmt.setDouble(1,capacity);
-//            //
-////            ResultSet rs  = pstmt.executeQuery();
-//
-//            // loop through the result set
-//            while (rs.next()) {
-////                System.out.println(rs.getInt("id") +  "\t" +
-////                        rs.getString("name") + "\t" +
-////                        rs.getDouble("capacity"));
-//                return rs.getString("password");
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return null;
-//    }
+    public static void getCustomerAccount(String username) {
+        new CustomerAccountFrame(username);
+    }
 
 }

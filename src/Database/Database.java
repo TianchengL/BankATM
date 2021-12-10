@@ -1,6 +1,7 @@
 package Database;
 
 import User.User;
+import User.Customers;
 
 import java.sql.*;
 
@@ -30,7 +31,7 @@ public class Database {
 
     public void createUserTable(){
         String sql = """
-                CREATE TABLE IF NOT EXISTS user (
+                CREATE TABLE IF NOT EXISTS userInfo (
                 	id integer PRIMARY KEY autoincrement,
                 	firstname text NOT NULL,
                 	lastname text NOT NULL
@@ -40,16 +41,16 @@ public class Database {
 
     //add a user to database and return his id
     public static void addUser(User user){
-        String sql = "INSERT INTO user (firstname, lastname) VALUES ('" +
+        String sql = "INSERT INTO userInfo (firstname, lastname) VALUES ('" +
                 user.getFirstname() + "', '" + user.getLastname() + "');";
 
         executeCommand(sql);
 
     }
 
-    //return the add of just added user
+    //return the id of just added user
     public static int getUserId(){
-        String sql = "SELECT id FROM user order by id DESC Limit 1";
+        String sql = "SELECT id FROM userInfo order by id DESC Limit 1";
         //String sql = "select firstname from user";
         int userID;
         try (Connection conn = DriverManager.getConnection(dbURL);
@@ -132,4 +133,38 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
+
+    public static void addPreviousUsers(){
+        // To load the data stored in the database as user objects before the program starts
+
+        String sql = "SELECT loginInfo.username, loginInfo.password, loginInfo.userId, loginInfo.userType, userInfo.firstname, userInfo.lastname "
+                + "FROM loginInfo INNER JOIN userInfo ON loginInfo.userId = userInfo.id";
+        String url = "jdbc:sqlite:bankAtm.db";
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt  = conn.createStatement();
+             ){
+            ResultSet rs    = stmt.executeQuery(sql);
+            User user;
+            while(rs.next()) {
+                int id = rs.getInt("userId");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
+                String username = rs.getString("username");
+                user = new Customers(firstname, lastname, username);
+                user.setId(id);
+                Collection.CollectionArrays.addUser(user);
+            }
+//            System.out.println(Collection.CollectionArrays.getUsers().size());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void updatePassword(String username, String newpwd){
+        String sql = "UPDATE loginInfo "
+                + "SET password = '" + newpwd + "'"
+                + " WHERE username = '" + username + "';";
+        executeCommand(sql);
+    }
+
 }
