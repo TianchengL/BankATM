@@ -3,6 +3,7 @@ package User;
 public abstract class User {
     private final String firstname;
     private final String lastname;
+    private final String username;
     private int id;
     private String address;
 
@@ -10,13 +11,14 @@ public abstract class User {
 
     public abstract UserType getType();
 
-    public User(String firstname, String lastname){
+    public User(String firstname, String lastname, String username){
         this.firstname = firstname;
         this.lastname = lastname;
+        this.username = username;
     }
 
-    public User(String firstname, String lastname, String address){
-        this(firstname, lastname);
+    public User(String firstname, String lastname, String address, String username){
+        this(firstname, lastname, username);
         this.address = address;
     }
 
@@ -44,5 +46,7 @@ public abstract class User {
         this.address = address;
     }
 
-
+    public String getUsername() {
+        return username;
+    }
 }

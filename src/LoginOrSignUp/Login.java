@@ -17,16 +17,16 @@ public class Login {
     /**needs to have a method to check with the database to see if there is a match user**/
 
     //return true if we find user
-    public boolean findUser(){
+    public String findUser(){
         //if pwd is empty means no user find
         String pwd = Database.checkUserExist(username);
-        return !pwd.isEmpty();
+        return pwd;
     }
 
     //return true if login success
     public boolean run(){
-        if(findUser()){
-            String pwd = Database.checkUserExist(username);
+        String pwd = findUser();
+        if(!pwd.isEmpty()){
             return pwd.equals(password);
         }
         return false;
