@@ -1,11 +1,11 @@
 package Database;
 
-import User.User;
-import User.Customers;
-import User.BankManager;
+import Collection.UserCollection;
+import User.*;
 
 import java.sql.*;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 //create specified named database and have function to access query
 public class Database {
@@ -125,6 +125,11 @@ public class Database {
         return res;
     }
 
+    public static User getUserById(int userId){
+
+        return null;
+    }
+
     private static void executeCommand(String sql){
 
         try (Connection conn = DriverManager.getConnection(dbURL);
@@ -136,13 +141,14 @@ public class Database {
         }
     }
 
-    public static void addPreviousUsers(){
+    public static List<User> addPreviousUsers(){
         // To load the data stored in the database as user objects before the program starts
 
+        List<User> list  = new ArrayList<>();
         String sql = "SELECT loginInfo.username, loginInfo.password, loginInfo.userId, loginInfo.userType, userInfo.firstname, userInfo.lastname "
                 + "FROM loginInfo INNER JOIN userInfo ON loginInfo.userId = userInfo.id";
-        String url = "jdbc:sqlite:bankAtm.db";
-        try (Connection conn = DriverManager.getConnection(url);
+
+        try (Connection conn = DriverManager.getConnection(dbURL);
              Statement stmt  = conn.createStatement();
              ){
             ResultSet rs    = stmt.executeQuery(sql);
@@ -152,16 +158,18 @@ public class Database {
                 String firstname = rs.getString("firstname");
                 String lastname = rs.getString("lastname");
                 String username = rs.getString("username");
-                if(Objects.equals(rs.getString("userType"), "Manager"))
-                    user = new BankManager(firstname, lastname, username);
-                else
-                    user = new Customers(firstname, lastname, username);
+                String userType = rs.getString("userType");
+                if(userType.equals("Manager")) user = new BankManager(firstname, lastname, username);
+                else user = new Customers(firstname, lastname, username);
                 user.setId(id);
-                Collection.CollectionArrays.addUser(user);
+                list.add(user);
             }
+//            System.out.println(Collection.CollectionArrays.getUsers().size());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        return list;
     }
 
     public static void updatePassword(String username, String newpwd){

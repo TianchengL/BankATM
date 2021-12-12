@@ -26,5 +26,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="sqlite-jdbc-3.36.0.3" level="project" />
+    <orderEntry type="library" name="opencsv-5.5.2" level="project" />
+    <orderEntry type="library" name="sqlite-jdbc-3.36.0.31" level="project" />
   </component>
 </module>

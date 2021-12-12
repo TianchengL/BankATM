@@ -62,38 +62,29 @@ public class WelcomeFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
-
-            LoginFrame.main();
-//            frame.setTitle("Login.Login Form");
-//            frame.setVisible(true);
-//            frame.setBounds(10,10,600,600);
-//            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//            frame.setResizable(false);
+            new LoginFrame();
+            this.dispose();
         }
         else if(e.getSource() == createButton) {
-
-            //Database.clearTable("user");
-//            Database.dropTable("user");
-//            Database.dropTable("loginInfo");
-            SignupFrame.main();
-
+            new SignupFrame();
+            this.dispose();
         }
     }
 
-    public static void welcome()  {
-//        Database database = new Database();
-//        Database.addPreviousUsers();
+    public static void main(String[] args) {
+        Database database = new Database();
+        Database.addPreviousUsers();
         //default manager
 //        SignUp signUp = new SignUp("Cristine", "CPK", "boss",
 //                User.UserType.MANAGER, "123", "123");
 //        signUp.addUser();
-//        WelcomeFrame frame=new WelcomeFrame();
-//        frame.setTitle("Welcome Form");
-//        frame.setBounds(10,10,600,600);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        //frame.setResizable(false);
-//        frame.setVisible(true);
-        new WelcomeFrame();
+        WelcomeFrame frame=new WelcomeFrame();
+        frame.setTitle("Welcome Form");
+        frame.setBounds(10,10,600,600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setResizable(false);
+        frame.setVisible(true);
+        //new WelcomeFrame();
     }
 
 }
