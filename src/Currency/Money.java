@@ -12,8 +12,12 @@ public class Money implements Serializable {
     }
 
     //remove certain amount of money
-    public void deductMoney(double amount){
-        this.amount -= amount;
+    public boolean deductMoney(double amount){
+        if(this.amount>amount){
+            this.amount -= amount;
+            return true;
+        }
+        return false;
     }
 
     //add certain amount of money

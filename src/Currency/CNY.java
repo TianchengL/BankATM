@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 
-public class CNY extends Currency{
+public class  CNY extends Currency{
 
     private static CNY cny;
 

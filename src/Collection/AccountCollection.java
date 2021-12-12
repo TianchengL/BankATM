@@ -1,6 +1,7 @@
 package Collection;
 
 import Account.*;
+import Utility.ID;
 
 
 import java.io.*;
@@ -67,7 +68,14 @@ public class AccountCollection {
         return accounts;
 
     }
-
+    public Account getAccountById(ID accountId){
+        for(Account account:accounts){
+            if(account.getId()==accountId){
+                return account;
+            }
+        }
+        return null;
+    }
     //return all accounts that stored in memory
     public List<Account> getAccounts(){
         return accounts;
