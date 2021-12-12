@@ -14,7 +14,12 @@
         </constraints>
         <properties/>
         <border type="none"/>
-        <children/>
+        <children>
+          <component id="708e3" class="javax.swing.JTextArea" binding="accountsInfo">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
       </scrollpane>
       <component id="af8f2" class="javax.swing.JButton" binding="backButton" default-binding="true">
         <constraints>

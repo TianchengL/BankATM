@@ -34,6 +34,6 @@ public class ID implements Serializable {
 
     @Override
     public String toString() {
-        return "id = " + id.toString();
+        return id.toString();
     }
 }

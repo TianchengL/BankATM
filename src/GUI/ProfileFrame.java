@@ -137,8 +137,5 @@ public class ProfileFrame extends JFrame implements ActionListener {
         }
     }
 
-    public static void getProfile(String username){
-        new ProfileFrame(username);
-    }
 
 }

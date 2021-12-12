@@ -58,4 +58,14 @@ public abstract class Account implements Serializable {
         this.openDate = openDate;
     }
     abstract AccountType getType();
+
+    @Override
+    public String toString() {
+        return "{" +
+                "accountID: " + accountID +
+                ", currency: " + currency +
+                ", openDate: " + openDate +
+                ", deposit: " + deposit +
+                '}';
+    }
 }

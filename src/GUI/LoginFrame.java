@@ -11,77 +11,6 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class LoginFrame extends JFrame implements ActionListener {
-//    private JPanel LoginPanel;
-//    private JPanel westLabelPanel;
-//    private JPanel southLabelPanel;
-//    private JLabel usernameLabel;
-//    private JPanel centerLabelPanel;
-//    private JTextField usernameField;
-//    private JPasswordField passwordField;
-//    private JLabel passwordLabel;
-//    private JButton loginButton;
-//    private JButton resetButton;
-//    private JCheckBox showPwdCheckBox;
-//
-//    public LoginFrame(){
-//        setContentPane(LoginPanel);
-//        setTitle("Login Form");
-//        setSize(450, 450);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setVisible(true);
-//        loginButton.addActionListener(this);
-//        resetButton.addActionListener(this);
-//        showPwdCheckBox.addActionListener(this);
-//    }
-//
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        if (e.getSource() == loginButton) {
-//            String userText;
-//            char[] pwdText;
-//            userText = usernameField.getText();
-//            pwdText = passwordField.getPassword();
-//
-//            if(userText.isEmpty()){
-//                JOptionPane.showMessageDialog(this, "Please enter a username");
-//            }
-//            else if(pwdText.length == 0){
-//                JOptionPane.showMessageDialog(this, "Please enter a password");
-//            }else{
-//
-//                Login login = new Login(userText, String.valueOf(pwdText));
-//                if(login.findUser().isEmpty()){
-//                    JOptionPane.showMessageDialog(this, "No user found, Please go signUp");
-//                }else if(login.run()){
-//                    if(login.getUserType().equals("Customer")){
-//                        //need to jump to customer account frame
-//                        JOptionPane.showMessageDialog(this, "Customer Login Successful");
-//                    }else{
-//                        //jump to manager account frame
-//                        JOptionPane.showMessageDialog(this, "Manager Login Successful");
-//                    }
-//
-//                    //dispose();
-//
-//                }
-//            }
-//
-//        }
-//        //Coding Part of showPassword JCheckBox
-//        if (e.getSource() == showPwdCheckBox) {
-//            if (showPwdCheckBox.isSelected()) {
-//                passwordField.setEchoChar((char) 0);
-//            } else {
-//                passwordField.setEchoChar('*');
-//            }
-//        }
-//        //Coding Part of RESET button
-//        if (e.getSource() == resetButton) {
-//            usernameField.setText("");
-//            passwordField.setText("");
-//        }
-//    }
-
 
     private final Container container = getContentPane();
     private final JLabel userLabel;
@@ -92,16 +21,6 @@ public class LoginFrame extends JFrame implements ActionListener {
     private final JButton resetButton;
     private final JCheckBox showPassword;
 
-//    public LoginFrame(){
-//        setContentPane(LoginPanel);
-//        setTitle("Login Form");
-//        setSize(450, 450);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setVisible(true);
-//        loginButton.addActionListener(this);
-//        resetButton.addActionListener(this);
-//        showPwdCheckBox.addActionListener(this);
-//    }
 
     public LoginFrame() {
         setTitle("Login Form");
@@ -191,12 +110,12 @@ public class LoginFrame extends JFrame implements ActionListener {
                         //need to jump to customer account frame
                         JOptionPane.showMessageDialog(this, "Customer Login Successful");
                         dispose();
-                        CustomerMainMenuFrame.getCustomerAccount(userText);
+                        new CustomerMainMenuFrame(userText);
                     }else{
                         //jump to manager account frame
                         JOptionPane.showMessageDialog(this, "Manager Login Successful");
                         dispose();
-                        ManagerAccountFrame.getManagerAccount(userText);
+                        new ManagerAccountFrame(userText);
                     }
 
                     //dispose();

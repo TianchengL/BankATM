@@ -49,7 +49,6 @@ public class SignUp {
    /** Might need to provide some method to check if input password meet some constraints
     * such as at least one Capital letter. ect...**/
 
-
     //Added condition to check this during signup
     //check if password and confirm password the same
     //return true if its same

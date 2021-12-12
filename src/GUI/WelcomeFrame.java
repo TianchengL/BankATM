@@ -18,7 +18,6 @@ public class WelcomeFrame extends JFrame implements ActionListener {
     private final JButton loginButton;
     private final JButton createButton;
 
-
     public WelcomeFrame() {
         setTitle("Welcome Form");
         setVisible(true);
@@ -63,9 +62,11 @@ public class WelcomeFrame extends JFrame implements ActionListener {
         //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
             new LoginFrame();
+            dispose();
         }
         else if(e.getSource() == createButton) {
             new SignupFrame();
+            dispose();
         }
     }
 

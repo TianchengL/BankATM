@@ -92,10 +92,10 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
         if (e.getSource() == profileButton) {
-            ProfileFrame.getProfile(username);
+            new ProfileFrame(username);
         }
         if (e.getSource() == accountButton) {
-
+            new ViewCustomerAccountsFrame(user.getId());
         }
         if (e.getSource() == checkTransactionButton) {
 
@@ -113,10 +113,6 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         if (e.getSource() == logoutButton) {
             dispose();
         }
-    }
-
-    public static void getCustomerAccount(String username) {
-        new CustomerMainMenuFrame(username);
     }
 
 }

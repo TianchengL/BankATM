@@ -13,31 +13,6 @@ import java.util.Objects;
 
 public class SignupFrame extends JFrame implements ActionListener{
 
-//    private JTextField firstName;
-//    private JTextField lastName;
-//    private JTextField username;
-//    private JTextField password;
-//    private JTextField passwordConfirm;
-//    private JButton OKButton;
-//    private JButton resetButton;
-//    private JPanel signupPanel;
-//
-//    public SignupFrame(){
-//        setContentPane(signupPanel);
-//        setTitle("Signup Form");
-//        setSize(600, 600);
-//        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//        setVisible(true);
-//        OKButton.addActionListener(this);
-//        resetButton.addActionListener(this);
-//
-//    }
-
-
-
-
-
-
     private final Container container = getContentPane();
     private final JLabel firstNameLabel;
     private final JLabel lastNameLabel;
@@ -53,7 +28,7 @@ public class SignupFrame extends JFrame implements ActionListener{
     private final JButton resetButton;
 
 
-    SignupFrame() {
+    public SignupFrame() {
         setTitle("Signup Form");
         setVisible(true);
         setBounds(10,10,600,600);

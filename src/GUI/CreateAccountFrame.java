@@ -26,6 +26,7 @@ public class CreateAccountFrame extends JFrame {
     private JButton createAccountButton;
     private JTextField InitialDepositTextField;
 
+
     public CreateAccountFrame(User user){
         setContentPane(createAccountPanel);
         setTitle("Create Account Form");

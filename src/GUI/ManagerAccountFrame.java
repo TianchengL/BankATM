@@ -79,7 +79,7 @@ public class ManagerAccountFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
         if (e.getSource() == profileButton) {
-            ProfileFrame.getProfile(username);
+            new ProfileFrame(username);
         }
         if (e.getSource() == checkCustomerInfoButton) {
 
@@ -98,8 +98,5 @@ public class ManagerAccountFrame extends JFrame implements ActionListener {
         }
     }
 
-    public static void getManagerAccount(String username) {
-        new ManagerAccountFrame(username);
-    }
 
 }
