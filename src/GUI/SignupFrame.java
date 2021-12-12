@@ -168,7 +168,7 @@ public class SignupFrame extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(this,
                         "Account created! Please login to your account");
                 dispose();
-                LoginFrame.main();
+                new LoginFrame();
             }
         }
         //Coding Part of RESET button
@@ -177,7 +177,4 @@ public class SignupFrame extends JFrame implements ActionListener{
         }
     }
 
-    public static void main() {
-        new SignupFrame();
-    }
 }

@@ -1,13 +1,11 @@
 package GUI;
 
-import Database.Database;
 import LoginOrSignUp.Login;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class LoginFrame extends JFrame implements ActionListener {
 //    private JPanel LoginPanel;
@@ -180,7 +178,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                         //need to jump to customer account frame
                         JOptionPane.showMessageDialog(this, "Customer Login Successful");
                         dispose();
-                        CustomerAccountFrame.getCustomerAccount(userText);
+                        CustomerMainMenuFrame.getCustomerAccount(userText);
                     }else{
                         //jump to manager account frame
                         JOptionPane.showMessageDialog(this, "Manager Login Successful");
@@ -211,9 +209,5 @@ public class LoginFrame extends JFrame implements ActionListener {
 
 
         }
-    }
-
-    public static void main() {
-        new LoginFrame();
     }
 }

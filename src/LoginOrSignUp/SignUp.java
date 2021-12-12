@@ -2,7 +2,7 @@ package LoginOrSignUp;
 
 import Database.Database;
 import User.*;
-import Collection.CollectionArrays;
+import Collection.UserCollection;
 
 public class SignUp {
 
@@ -25,7 +25,7 @@ public class SignUp {
     //add a new user to database and set its id
     public void addUser(){
         User user;
-        int id = -1;
+        int id;
         if(type == User.UserType.MANAGER){
             user = new BankManager(this.firstName, this.lastName, this.userName);
 //            System.out.println(user.getType());
@@ -34,14 +34,14 @@ public class SignUp {
             user.setId(id);
             //add credential info into credential table
             Database.addToCredentialTable(user, userName, password);
-            CollectionArrays.addUser(user);
+            UserCollection.getInstance().addUser(user);
         }else if(type == User.UserType.CUSTOMER){
             user = new Customers(this.firstName, this.lastName, this.userName);
             Database.addUser(user);
             id = Database.getUserId();
             user.setId(id);
             Database.addToCredentialTable(user, userName, password);
-            CollectionArrays.addUser(user);
+            UserCollection.getInstance().addUser(user);
         }
     }
 

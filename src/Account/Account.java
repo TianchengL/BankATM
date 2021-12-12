@@ -1,27 +1,43 @@
 package Account;
 
-import Currency.Currency;
+import Currency.*;
+import Utility.*;
+import User.*;
+
+import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
-public abstract class Account {
 
-    private UUID id;
+public abstract class Account implements Serializable {
+
+    private ID accountID;
     private Currency currency;
     private Date openDate;
+    private Money deposit;
+    private User user;
 
-    public Account(UUID id, Currency currency, Date openDate){
-        this.id = id;
+    public enum AccountType{CHECKING_ACCOUNT, SAVING_ACCOUNT, STOCK_ACCOUNT}
+
+    public Account(ID accountID, Currency currency, Date openDate, Money deposit, User user){
+        this.accountID = accountID;
         this.currency = currency;
         this.openDate = openDate;
-
+        this.deposit = deposit;
+        this.user = user;
     }
 
-    public UUID getId() {
-        return id;
+    public Money getDeposit() {
+        return deposit;
     }
-    public void setId(UUID id) {
-        this.id = id;
+    public void setDeposit(Money deposit) {
+        this.deposit = deposit;
+    }
+
+    public ID getId() {
+        return accountID;
+    }
+    public void setId(ID id) {
+        this.accountID = id;
     }
     public Currency getCurrency() {
         return currency;
@@ -38,4 +54,5 @@ public abstract class Account {
     public void setOpenDate(Date openDate) {
         this.openDate = openDate;
     }
+    abstract AccountType getType();
 }

@@ -1,12 +1,19 @@
 package Account;
 
-import Currency.Currency;
+import Currency.*;
+import Utility.*;
+import User.*;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
-public class CheckingAccount extends Account{
-    public CheckingAccount(UUID id, Currency currency, Date openDate) {
-        super(id, currency, openDate);
+public class CheckingAccount extends Account implements Serializable {
+    public CheckingAccount(ID accountID, Currency currency, Date openDate, Money deposit, User user) {
+        super(accountID, currency, openDate, deposit, user);
+    }
+
+    @Override
+    public AccountType getType() {
+        return AccountType.CHECKING_ACCOUNT;
     }
 }

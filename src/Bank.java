@@ -11,13 +11,13 @@ public class Bank {
 
     public void run(){
         Database database = new Database();
-        Database.addPreviousUsers();
+        //Database.addPreviousUsers();
         //default manager
         SignUp signUp = new SignUp("Cristine", "CPK", "admin",
                 User.UserType.MANAGER, "admin", "admin");
         if(Database.checkUserExist("admin").isEmpty())
             signUp.addUser();
-        WelcomeFrame.welcome();
+        new WelcomeFrame();
 
 //        Database.createNewDatabase();
 //        createTable.createNewTables();

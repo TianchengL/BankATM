@@ -12,9 +12,4 @@ public class BankManager extends User {
         return UserType.MANAGER;
     }
 
-//    public void insert(){
-//        // SQL statement for inserting
-//        String sql = "INSERT INTO loginInfo (username, password) VALUES ('admin', 'admin');";
-//        ExecuteSqlCommand.executeCommand(sql);
-//    }
 }
