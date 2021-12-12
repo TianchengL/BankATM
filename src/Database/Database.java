@@ -2,8 +2,10 @@ package Database;
 
 import User.User;
 import User.Customers;
+import User.BankManager;
 
 import java.sql.*;
+import java.util.Objects;
 
 //create specified named database and have function to access query
 public class Database {
@@ -150,11 +152,13 @@ public class Database {
                 String firstname = rs.getString("firstname");
                 String lastname = rs.getString("lastname");
                 String username = rs.getString("username");
-                user = new Customers(firstname, lastname, username);
+                if(Objects.equals(rs.getString("userType"), "Manager"))
+                    user = new BankManager(firstname, lastname, username);
+                else
+                    user = new Customers(firstname, lastname, username);
                 user.setId(id);
                 Collection.CollectionArrays.addUser(user);
             }
-//            System.out.println(Collection.CollectionArrays.getUsers().size());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

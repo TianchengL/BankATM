@@ -10,7 +10,7 @@ public class Bank {
 
 
     public void run(){
-//        Database database = new Database();
+        Database database = new Database();
         Database.addPreviousUsers();
         //default manager
         SignUp signUp = new SignUp("Cristine", "CPK", "admin",

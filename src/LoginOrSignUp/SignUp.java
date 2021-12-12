@@ -28,6 +28,7 @@ public class SignUp {
         int id = -1;
         if(type == User.UserType.MANAGER){
             user = new BankManager(this.firstName, this.lastName, this.userName);
+//            System.out.println(user.getType());
             Database.addUser(user);
             id = Database.getUserId();
             user.setId(id);
