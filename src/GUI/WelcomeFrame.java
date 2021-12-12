@@ -63,11 +63,9 @@ public class WelcomeFrame extends JFrame implements ActionListener {
         //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
             new LoginFrame();
-            this.dispose();
         }
         else if(e.getSource() == createButton) {
             new SignupFrame();
-            this.dispose();
         }
     }
 

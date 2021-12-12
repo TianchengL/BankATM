@@ -1,11 +1,14 @@
 package GUI;
 
+import Database.Database;
 import LoginOrSignUp.Login;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class LoginFrame extends JFrame implements ActionListener {
 //    private JPanel LoginPanel;
@@ -152,6 +155,11 @@ public class LoginFrame extends JFrame implements ActionListener {
         showPassword.addActionListener(this);
     }
 
+    public void reset() {
+        userTextField.setText("");
+        passwordField.setText("");
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -168,7 +176,12 @@ public class LoginFrame extends JFrame implements ActionListener {
             }
             else if(pwdText.length() == 0){
                 JOptionPane.showMessageDialog(this, "Please enter a password");
-            }else{
+            }
+            else if(!Objects.equals(Database.checkUserExist(userText), pwdText)){
+                JOptionPane.showMessageDialog(this, "Invalid username or password");
+                reset();
+            }
+            else{
 
                 Login login = new Login(userText, pwdText);
                 if(login.findUser().isEmpty()){
@@ -196,8 +209,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 
         //Coding Part of RESET button
         if (e.getSource() == resetButton) {
-            userTextField.setText("");
-            passwordField.setText("");
+            reset();
         }
         //Coding Part of showPassword JCheckBox
         if (e.getSource() == showPassword) {

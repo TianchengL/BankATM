@@ -3,14 +3,17 @@ package GUI;
 import Collection.UserCollection;
 import Database.Database;
 import User.Customers;
+import User.User;
+import User.BankManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class ProfileFrame extends JFrame implements ActionListener {
-    private Customers customer;
+    private User user;
     private String username;
     private final Container container = getContentPane();;
     private final JLabel firstNameLabel;
@@ -30,7 +33,7 @@ public class ProfileFrame extends JFrame implements ActionListener {
 
 
     public ProfileFrame(String username) {
-        setTitle("Customer Profile");
+        setTitle("User Profile");
         setVisible(true);
         setBounds(10,10,600,600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -50,13 +53,15 @@ public class ProfileFrame extends JFrame implements ActionListener {
         returnButton = new JButton("Back");
         resetPasswordButton = new JButton("Reset Password");
         newPwdField = new JTextField();
-        customer = (Customers) UserCollection.getInstance().retrieveUser(username);
-////        System.out.println(customer.getName());
-        firstName.setText(customer.getFirstname());
-        lastName.setText(customer.getLastname());
-        uname.setText(customer.getUsername());
-        id.setText("" + customer.getId()+ "");
-        password.setText(Database.checkUserExist(customer.getUsername()));
+        if(Objects.equals(Database.getUserType(username), "Manager"))
+            user = (BankManager) UserCollection.getInstance().retrieveUser(username);
+        else
+            user = (Customers) UserCollection.getInstance().retrieveUser(username);
+        firstName.setText(user.getFirstname());
+        lastName.setText(user.getLastname());
+        uname.setText(user.getUsername());
+        id.setText("" + user.getId()+ "");
+        password.setText(Database.checkUserExist(user.getUsername()));
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
@@ -118,11 +123,11 @@ public class ProfileFrame extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Please enter the new password");
             }
             else{
-//                customer.setPassword(newPwd);
+//                user.setPassword(newPwd);
 //                this.updatePassword();
                 Database.updatePassword(username, newPwd);
                 JOptionPane.showMessageDialog(this, "Password Updated");
-                password.setText(Database.checkUserExist(customer.getUsername()));
+                password.setText(Database.checkUserExist(user.getUsername()));
                 newPwdField.setText("");
             }
         }
