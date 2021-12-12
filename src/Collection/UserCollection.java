@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * a list of users
+ */
 public class UserCollection {
 
     private List<User> users;
@@ -29,10 +32,12 @@ public class UserCollection {
         this.users = Database.addPreviousUsers();
     }
 
+    //get the entire user list
     public List<User> getUsers() {
         return users;
     }
 
+    //add one user to list
     public void addUser(User user){
         users.add(user);
     }
@@ -46,7 +51,7 @@ public class UserCollection {
         return null;
     }
 
-
+    //retrieve user by username
     public User retrieveUser(String username){
         // return a user object from username
         for(User user: users){

@@ -6,9 +6,9 @@ import Account.*;
 import java.io.*;
 import java.util.*;
 
+//a list of storage of all counts stored in disk
 public class AccountCollection {
 
-    //every account should be unique so use hasSet
     private List<Account> accounts;
     private static AccountCollection instance;
     private final String CSV_Location = "src/Data/Accounts.csv";
