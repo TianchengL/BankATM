@@ -48,6 +48,8 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         user = UserCollection.getInstance().retrieveUser(username);
     }
 
+
+
     public void setLayoutManager() {
         container.setLayout(null);
     }

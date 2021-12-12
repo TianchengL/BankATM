@@ -14,7 +14,7 @@ public abstract class Account implements Serializable {
     private Currency currency;
     private Date openDate;
     private Money deposit;
-    private User user;
+    private final User user;
 
     public enum AccountType{CHECKING_ACCOUNT, SAVING_ACCOUNT, STOCK_ACCOUNT}
 
@@ -33,6 +33,9 @@ public abstract class Account implements Serializable {
         this.deposit = deposit;
     }
 
+    public User getUser(){
+        return user;
+    }
     public ID getId() {
         return accountID;
     }

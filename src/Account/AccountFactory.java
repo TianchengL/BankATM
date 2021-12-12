@@ -21,6 +21,7 @@ public class AccountFactory {
         Account account = null;
         if(accountType == Account.AccountType.CHECKING_ACCOUNT){
             account = new CheckingAccount(accountId, currency, date, money, user);
+            //add accounts to collection
             AccountCollection.getInstance().addAccount(account);
         }else if(accountType == Account.AccountType.SAVING_ACCOUNT){
             account = new SavingAccount(accountId, currency, date, money, user);

@@ -68,7 +68,7 @@ public class AccountCollection {
 
     }
 
-    //return accounts stored in memory
+    //return all accounts that stored in memory
     public List<Account> getAccounts(){
         return accounts;
     }
@@ -76,6 +76,18 @@ public class AccountCollection {
     //add one account to memory
     public void addAccount(Account account){
         accounts.add(account);
+    }
+
+    //get current user accounts
+    public List<Account> getUserAccounts(int userID){
+
+        List<Account> list = new ArrayList<>();
+        for (Account account : accounts) {
+            if(account.getUser().getId() == userID){
+                list.add(account);
+            }
+        }
+        return list;
     }
 
     public static void main(String[] args) {
