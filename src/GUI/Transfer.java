@@ -11,26 +11,25 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
-public class Withdraw extends JFrame{
-    private JTextField amount;
+public class Transfer extends JFrame{
+    private JComboBox<String> withdrawAccount;
+    private JComboBox<String> depositAccount;
+    private JButton transferButton;
     private JButton cancelButton;
-    private JButton withdrawButton;
-    private JPanel WithdrawPanel;
-    private JComboBox<String> checking;
+    private JTextField amount;
+    private JPanel transfer;
 
-    public Withdraw(User user){
-        setContentPane(WithdrawPanel);
+    public Transfer(User user){
+        setContentPane(transfer);
         setTitle("View Accounts Form");
         setSize(350, 450);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(user.getId());
         for(Account account : accounts){
-            if(account.getType()== Account.AccountType.CHECKING_ACCOUNT){
-                checking.addItem(account.getId().toString());
-            }
+            withdrawAccount.addItem(account.getId().toString());
+            depositAccount.addItem(account.getId().toString());
         }
-
         amount.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -43,17 +42,17 @@ public class Withdraw extends JFrame{
                 super.keyTyped(e);
             }
         });
-
-        withdrawButton.addActionListener(new ActionListener() {
+        transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Account account=(Account)checking.getSelectedItem();
-                account.withdraw(getWithdraw(),true,"Withdraw:");
 
             }
         });
+
+
+
     }
-    private double getWithdraw(){
+    private double getAmount(){
         return Double.parseDouble(amount.getText());
     }
 }
