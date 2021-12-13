@@ -31,7 +31,7 @@ public class SignupFrame extends JFrame implements ActionListener{
     public SignupFrame() {
         setTitle("Signup Form");
         setVisible(true);
-        setBounds(10,10,600,600);
+        setBounds(10,10,1000,800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         firstNameLabel = new JLabel("First Name");
@@ -57,18 +57,18 @@ public class SignupFrame extends JFrame implements ActionListener{
     }
 
     public void setLocationAndSize() {
-        firstNameLabel.setBounds(100, 150, 100, 40);
-        lastNameLabel.setBounds(100, 200, 100, 40);
-        usernameLabel.setBounds(100, 250, 100, 40);
-        passwordLabel.setBounds(100, 300, 100, 40);
-        passwordConfirmLabel.setBounds(100, 350, 150, 40);
-        firstName.setBounds(250, 150, 150, 30);
-        lastName.setBounds(250, 200, 150, 30);
-        username.setBounds(250, 250, 150, 30);
-        password.setBounds(250, 300, 150, 30);
-        passwordConfirm.setBounds(250, 350, 150, 30);
-        createButton.setBounds(100, 400, 200, 35);
-        resetButton.setBounds(300, 400, 100, 35);
+        firstNameLabel.setBounds(300, 250, 100, 40);
+        lastNameLabel.setBounds(300, 300, 100, 40);
+        usernameLabel.setBounds(300, 350, 100, 40);
+        passwordLabel.setBounds(300, 400, 100, 40);
+        passwordConfirmLabel.setBounds(300, 450, 150, 40);
+        firstName.setBounds(550, 250, 150, 30);
+        lastName.setBounds(550, 300, 150, 30);
+        username.setBounds(550, 350, 150, 30);
+        password.setBounds(550, 400, 150, 30);
+        passwordConfirm.setBounds(550, 450, 150, 30);
+        createButton.setBounds(300, 500, 200, 35);
+        resetButton.setBounds(600, 500, 100, 35);
 
 
     }

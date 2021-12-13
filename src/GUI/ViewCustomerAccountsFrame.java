@@ -12,25 +12,41 @@ public class ViewCustomerAccountsFrame extends JFrame {
     private JPanel viewAccountsPanel;
     private JButton backButton;
     private JLabel userIDLabel;
-    private JScrollPane scrollPane;
     private JTextArea accountsInfo;
+    private JTextArea idField;
+    private JTextArea accountField;
+    private JTextArea balanceField;
+    private JTextArea currencyField;
+    private JTextArea dateField;
 
 
     public ViewCustomerAccountsFrame(int userID){
+        setTitle("Customer Accounts");
         setContentPane(viewAccountsPanel);
         setTitle("View Accounts Form");
-        setSize(350, 450);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(true);
         setVisible(true);
-        userIDLabel.setText(String.valueOf(userID));
+        setSize(1000, 800);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        scrollPane.createHorizontalScrollBar();
-        scrollPane.createVerticalScrollBar();
+//        scrollPane = new JScrollPane(accountArea);
+        userIDLabel.setText(String.valueOf(userID));
 
         //accountList.add
         List<Account> list = AccountCollection.getInstance().getUserAccounts(userID);
         for (Account account : list) {
-            accountsInfo.append(account.toString() + "\n\n");
+            String accountType = "";
+            if(account.getType() == Account.AccountType.SAVING_ACCOUNT)
+                accountType = "Savings Account";
+            else if(account.getType() == Account.AccountType.CHECKING_ACCOUNT)
+                accountType = "Checking Account";
+//            accountsInfo.append(account.toString() + "\n\n");
+            System.out.println(account);
+            idField.append("" + account.getId().toString().substring(0,8) + "\n\n");
+            accountField.append(accountType + "\n\n");
+            balanceField.append("" + account.getDeposit() + "\n\n");
+            currencyField.append("" + account.getCurrency() + "\n\n");
+            dateField.append("" + account.getOpenDate() + "\n\n");
         }
 
 

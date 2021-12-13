@@ -26,7 +26,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
     public CustomerMainMenuFrame(String username) {
         setTitle("Customer Account Form");
         setVisible(true);
-        setBounds(10,10,600,600);
+        setBounds(10,10,1000,800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         container = getContentPane();
@@ -35,7 +35,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         checkTransactionButton = new JButton("View transactions");
         profileButton = new JButton("Profile");
         createAccountButton = new JButton("Create a checkings/savings account");
-        loanButton = new JButton("Request Loan");
+        loanButton = new JButton("Manage Loans");
         makeTransactionButton = new JButton("Make transaction");
         logoutButton = new JButton("Logout");
         setLayoutManager();
@@ -55,14 +55,14 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
     }
 
     public void setLocationAndSize() {
-        userLabel.setBounds(400, 50, 200, 50);
-        profileButton.setBounds(50, 150, 200, 40);
-        accountButton.setBounds(250, 150, 200, 40);
-        checkTransactionButton.setBounds(50, 250, 200, 40);
-        createAccountButton.setBounds(250, 250, 200, 40);
-        loanButton.setBounds(50, 350, 200, 40);
-        makeTransactionButton.setBounds(250, 350, 200, 40);
-        logoutButton.setBounds(400, 450, 100, 35);
+        userLabel.setBounds(700, 100, 200, 50);
+        profileButton.setBounds(300, 250, 400, 40);
+        accountButton.setBounds(300, 300, 400, 40);
+        checkTransactionButton.setBounds(300, 350, 400, 40);
+        createAccountButton.setBounds(300, 400, 400, 40);
+        loanButton.setBounds(300, 450, 400, 40);
+        makeTransactionButton.setBounds(300, 500, 400, 40);
+        logoutButton.setBounds(700, 600, 100, 35);
 
     }
 
@@ -104,7 +104,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
             new CreateAccountFrame(this.user);
         }
         if (e.getSource() == loanButton) {
-
+            new LoanFrame(user);
         }
         if (e.getSource() == makeTransactionButton) {
 
