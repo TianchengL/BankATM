@@ -27,8 +27,8 @@ public class Transfer extends JFrame{
         setVisible(true);
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(user.getId());
         for(Account account : accounts){
-            withdrawAccount.addItem(account.getId().toString());
-            depositAccount.addItem(account.getId().toString());
+            withdrawAccount.addItem(account.getType().toString());
+            depositAccount.addItem(account.getType().toString());
         }
         amount.addKeyListener(new KeyAdapter() {
             @Override
@@ -45,6 +45,15 @@ public class Transfer extends JFrame{
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Account in;
+                Account out;
+                for(Account account : accounts){
+                    if(account.getType().equals(withdrawAccount.getSelectedItem())){
+                        out = account;
+                    }else if(account.getType().equals(depositAccount.getSelectedItem())){
+                        in = account;
+                    }
+                }
 
             }
         });

@@ -123,7 +123,11 @@ public abstract class Account implements Serializable, TransactionInterface {
         return false;
     }
 
-    public boolean transfer
+    public boolean transfer(Account withdraw,Account deposit,double amount){
+        withdraw(amount,false,"Transfer to "+ deposit.getType().toString());
+        deposit(amount,deposit.getCurrency(),false,"Transfer from "+ withdraw.getType().toString());
+        return true;
+    }
 
 
 }
