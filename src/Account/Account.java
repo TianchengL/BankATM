@@ -1,6 +1,7 @@
 package Account;
 
 import Collection.AccountCollection;
+import Collection.LoanCollection;
 import Collection.TransactionCollection;
 import Currency.*;
 import Transaction.*;
@@ -87,11 +88,17 @@ public abstract class Account implements Serializable, TransactionInterface {
     @Override
     public boolean withdraw(double amount, boolean isCharged, String memo) {
         if (isCharged) {
-            Transaction serviceFee = new Transaction("Withdraw Fee", TransactionFee);
+//            Transaction serviceFee = new Transaction("Withdraw Fee", TransactionFee);
+            TransactionFactory.createTransaction("Withdraw Fee", TransactionFee, getUser());
             deposit.deductMoney(TransactionFee);
+//            TransactionCollection.getInstance().addTransaction(serviceFee);
         }
 
-        Transaction transaction = new Transaction(memo, amount);
+//        Transaction transaction = new Transaction(memo, amount);
+        TransactionFactory.createTransaction(memo, amount, getUser());
+        deposit.deductMoney(amount);
+//        TransactionCollection.getInstance().addTransaction(transaction);
+        TransactionCollection.getInstance().saveTransactionToCSV(TransactionCollection.getInstance().getTransactions());
         if (deposit.deductMoney(amount)) {
             return true;
         }
@@ -102,14 +109,20 @@ public abstract class Account implements Serializable, TransactionInterface {
     public boolean deposit(double amount, Currency cur, boolean isCharged, String memo) {
 
         if (isCharged) {
-            Transaction serviceFee = new Transaction("Deposit Fee", TransactionFee);
+//            Transaction serviceFee = new Transaction("Deposit Fee", TransactionFee);
+            TransactionFactory.createTransaction("Deposit Fee", TransactionFee, getUser());
             deposit.deductMoney(TransactionFee);
-            TransactionCollection.getInstance().addTransaction(serviceFee);
+            BankManager.addProfit(TransactionFee);
+//            TransactionCollection.getInstance().addTransaction(serviceFee);
         }
 
-        Transaction transaction = new Transaction(memo, amount);
+//        Transaction transaction = new Transaction(memo, amount);
+        TransactionFactory.createTransaction(memo, amount, getUser());
         deposit.addMoney(amount);
-        TransactionCollection.getInstance().addTransaction(transaction);
+//        TransactionCollection.getInstance().addTransaction(transaction);
+//        TransactionCollection.getInstance().addAllTransactions();
+        System.out.println(TransactionCollection.getInstance().getTransactions().size());
+        TransactionCollection.getInstance().saveTransactionToCSV(TransactionCollection.getInstance().getTransactions());
         return true;
     }
 
@@ -126,10 +139,11 @@ public abstract class Account implements Serializable, TransactionInterface {
         return false;
     }
 
-    public boolean transfer(Account deposit,double amount){
-        withdraw(amount,false,"Transfer to "+ deposit.getType().toString());
-        deposit(amount,deposit.getCurrency(),false,"Transfer from "+ this.getType().toString());
-
+    public boolean transfer(Account in,double amount){
+        withdraw(amount,false,"Transfer to "+ in.getType().toString());
+        in.deposit(amount,in.getCurrency(),false,"Transfer from "+ this.getType().toString());
+        TransactionFactory.createTransaction("Transfer Fee", TransactionFee, getUser());
+        BankManager.addProfit(TransactionFee);
         return true;
     }
 

@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Objects;
 
 public class Deposit extends JFrame{
     private JPanel DepositPanel;
@@ -23,7 +24,7 @@ public class Deposit extends JFrame{
     public Deposit(User user){
         setContentPane(DepositPanel);
         setTitle("View Accounts Form");
-        setSize(350, 450);
+        setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(user.getId());
@@ -46,21 +47,42 @@ public class Deposit extends JFrame{
             }
         });
 
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
         depositButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(getDeposit() < 100.0){
+                if(depositAmount.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(DepositPanel, "Please enter the deposit amount");
+                }
+                else if(getDeposit() < 100.0){
                     JOptionPane.showMessageDialog(DepositPanel, "Deposit cannot less than 100");
                 }else{
-                    Account account=(Account)checking.getSelectedItem();
-                    account.deposit(getDeposit(),account.getCurrency(),true,"Deposit:");
+                    List<Account> accounts = AccountCollection.getInstance().getAccounts();
+                    for(Account account: accounts){
+                        if(Objects.equals(account.getId().toString(), checking.getSelectedItem().toString())){
+                            account.deposit(getDeposit(),account.getCurrency(),true,"Deposit");
+                            break;
+                        }
+                    }
+//                    Account account = AccountCollection.getInstance().getAccountById(checking.getSelectedItem().toString());
+////                    Account account=(Account)checking.getSelectedItem();
+//                    account.deposit(getDeposit(),account.getCurrency(),true,"Deposit:");
+                    AccountCollection.getInstance().saveAccountToCSV(accounts);
+                    JOptionPane.showMessageDialog(DepositPanel, "Amount deposited");
+                    dispose();
                 }
             }
         });
     }
     //get  deposit
     private double getDeposit(){
-        return Double.parseDouble(depositAmount.getText());
+        return Double.parseDouble(depositAmount.getText().toString());
     }
 
     public static void main(String[] args) {

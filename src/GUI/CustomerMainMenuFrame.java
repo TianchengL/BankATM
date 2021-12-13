@@ -1,5 +1,6 @@
 package GUI;
 
+import Collection.TransactionCollection;
 import Collection.UserCollection;
 import Database.Database;
 import User.*;
@@ -98,7 +99,8 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
             new ViewCustomerAccountsFrame(user.getId());
         }
         if (e.getSource() == checkTransactionButton) {
-
+            TransactionCollection.getInstance().addAllTransactions();
+            new ViewTransactions(TransactionCollection.getInstance().getUserTransactions(user.getId()));
         }
         if (e.getSource() == createAccountButton) {
             new CreateAccountFrame(this.user);
@@ -107,8 +109,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
             new LoanFrame(user);
         }
         if (e.getSource() == makeTransactionButton) {
-
-
+            new ChooseTransactions(user);
         }
         if (e.getSource() == logoutButton) {
             dispose();

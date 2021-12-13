@@ -69,9 +69,9 @@ public class AccountCollection {
 
     }
 
-    public Account getAccountById(ID accountId){
+    public Account getAccountById(String accountId){
         for(Account account:accounts){
-            if(account.getId()==accountId){
+            if(Objects.equals(account.getId().toString(), accountId)){
                 return account;
             }
         }

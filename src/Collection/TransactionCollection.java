@@ -1,6 +1,7 @@
 package Collection;
 
 import Account.Account;
+import Loan.Loan;
 import Transaction.Transaction;
 import Transaction.Transaction;
 import Transaction.Transaction;
@@ -16,6 +17,10 @@ public class TransactionCollection {
     private List<Transaction> transactions;
     private static TransactionCollection instance;
     private final String CSV_Location = "src/Data/Transactions.csv";
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
     
     public TransactionCollection(){
         transactions = new ArrayList<>();
@@ -28,7 +33,7 @@ public class TransactionCollection {
     }
 
     //add all Transactions from file
-    private void addAllTransactions(){
+    public void addAllTransactions(){
         this.transactions = getTransactionFromFile();
     }
 
@@ -68,6 +73,17 @@ public class TransactionCollection {
         }
         return transactions;
 
+    }
+
+    public List<Transaction> getUserTransactions(int userID){
+
+        List<Transaction> list = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if(transaction.getUser().getId() == userID){
+                list.add(transaction);
+            }
+        }
+        return list;
     }
 
     public void addTransaction(Transaction transaction){
