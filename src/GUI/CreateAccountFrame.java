@@ -9,6 +9,7 @@ import User.*;
 import javax.swing.*;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -25,14 +26,17 @@ public class CreateAccountFrame extends JFrame {
     //private JFormattedTextField initialDepositTextField;
     private JButton createAccountButton;
     private JTextField InitialDepositTextField;
+    private JLabel createAccount;
 
 
     public CreateAccountFrame(User user){
+        setTitle("Create Account Form");
         setContentPane(createAccountPanel);
         setTitle("Create Account Form");
-        setSize(350, 450);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
+        setSize(1000, 800);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        createAccount.setFont(new Font("Serif", Font.BOLD, 20));
         comboBoxAccountType.addItem(Account.AccountType.CHECKING_ACCOUNT);
         comboBoxAccountType.addItem(Account.AccountType.SAVING_ACCOUNT);
         comboBoxCurrencyType.addItem(Currency.CurrencyType.CNY);
@@ -59,7 +63,10 @@ public class CreateAccountFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(getDeposit() < 100.0){
+                if(InitialDepositTextField.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(createAccountPanel, "Please add an initial deposit amount");
+                }
+                else if(getDeposit() < 100.0){
                     JOptionPane.showMessageDialog(createAccountPanel, "Initial Deposit cannot less than 100");
                 }else{
                     //create new account and add it to collection

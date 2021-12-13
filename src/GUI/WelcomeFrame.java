@@ -21,7 +21,7 @@ public class WelcomeFrame extends JFrame implements ActionListener {
     public WelcomeFrame() {
         setTitle("Welcome Form");
         setVisible(true);
-        setBounds(10,10,600,600);
+        setBounds(10,10,1000,800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setResizable(false);
         container = getContentPane();
@@ -40,9 +40,9 @@ public class WelcomeFrame extends JFrame implements ActionListener {
 
     public void setLocationAndSize() {
         welcomeLabel.setFont(new Font("Courier", Font.BOLD,40));
-        welcomeLabel.setBounds(200, 150, 200, 60);
-        loginButton.setBounds(100, 300, 100, 40);
-        createButton.setBounds(350, 300, 150, 40);
+        welcomeLabel.setBounds(400, 200, 200, 60);
+        loginButton.setBounds(250, 400, 200, 45);
+        createButton.setBounds(600, 400, 200, 45);
     }
 
     public void addComponentsToContainer() {
@@ -62,11 +62,9 @@ public class WelcomeFrame extends JFrame implements ActionListener {
         //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
             new LoginFrame();
-            dispose();
         }
         else if(e.getSource() == createButton) {
             new SignupFrame();
-            dispose();
         }
     }
 

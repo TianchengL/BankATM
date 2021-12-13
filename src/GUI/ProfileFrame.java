@@ -35,7 +35,7 @@ public class ProfileFrame extends JFrame implements ActionListener {
     public ProfileFrame(String username) {
         setTitle("User Profile");
         setVisible(true);
-        setBounds(10,10,600,600);
+        setBounds(10,10,1000,800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         this.username = username;
@@ -73,21 +73,21 @@ public class ProfileFrame extends JFrame implements ActionListener {
     }
 
     public void setLocationAndSize() {
-        idLabel.setBounds(100, 150, 100, 40);
-        firstNameLabel.setBounds(100, 200, 100, 40);
-        lastNameLabel.setBounds(100, 250, 100, 40);
-        userLabel.setBounds(100, 300, 100, 40);
-        passwordLabel.setBounds(100, 350, 100, 40);
-        id.setBounds(250, 150, 200, 40);
-        firstName.setBounds(250, 200, 200, 40);
-        lastName.setBounds(250, 250, 200, 40);
-        uname.setBounds(250, 300, 200, 40);
-        password.setBounds(250, 350, 200, 40);
-        resetLabel.setBounds(100, 400, 100, 40);
+        idLabel.setBounds(300, 150, 100, 40);
+        firstNameLabel.setBounds(300, 200, 100, 40);
+        lastNameLabel.setBounds(300, 250, 100, 40);
+        userLabel.setBounds(300, 300, 100, 40);
+        passwordLabel.setBounds(300, 350, 100, 40);
+        id.setBounds(550, 150, 200, 40);
+        firstName.setBounds(550, 200, 200, 40);
+        lastName.setBounds(550, 250, 200, 40);
+        uname.setBounds(550, 300, 200, 40);
+        password.setBounds(550, 350, 200, 40);
+        resetLabel.setBounds(300, 400, 100, 40);
 //        oldPwdField.setBounds(200, 400, 200, 30);
-        newPwdField.setBounds(250, 400, 200, 30);
-        returnButton.setBounds(300, 500, 100, 35);
-        resetPasswordButton.setBounds(100, 500, 200, 35);
+        newPwdField.setBounds(550, 400, 200, 30);
+        returnButton.setBounds(600, 500, 100, 35);
+        resetPasswordButton.setBounds(300, 500, 200, 35);
     }
 
     public void addComponentsToContainer() {

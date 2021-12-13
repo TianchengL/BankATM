@@ -25,7 +25,7 @@ public class LoginFrame extends JFrame implements ActionListener {
     public LoginFrame() {
         setTitle("Login Form");
         setVisible(true);
-        setBounds(10,10,600,600);
+        setBounds(10,10,1000,800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         userLabel = new JLabel("USERNAME");
@@ -47,13 +47,13 @@ public class LoginFrame extends JFrame implements ActionListener {
     }
 
     public void setLocationAndSize() {
-        userLabel.setBounds(100, 150, 100, 40);
-        passwordLabel.setBounds(100, 220, 100, 40);
-        userTextField.setBounds(250, 150, 150, 30);
-        passwordField.setBounds(250, 220, 150, 30);
-        showPassword.setBounds(250, 250, 150, 30);
-        loginButton.setBounds(100, 300, 100, 35);
-        resetButton.setBounds(300, 300, 100, 35);
+        userLabel.setBounds(300, 250, 100, 50);
+        passwordLabel.setBounds(300, 400, 100, 50);
+        userTextField.setBounds(550, 250, 150, 40);
+        passwordField.setBounds(550, 400, 150, 40);
+        showPassword.setBounds(550, 450, 150, 40);
+        loginButton.setBounds(300, 500, 100, 40);
+        resetButton.setBounds(600, 500, 100, 40);
 
 
     }
