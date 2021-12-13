@@ -1,20 +1,32 @@
 package Transaction;
 
-public class Transaction {
+import User.User;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Transaction implements Serializable {
     private final String memo;
     private final double amount;
-    private String date;
+    private Date date;
+    private final User user;
 
-
-    public Transaction(String memo,double amount) {
-        this.memo = memo;
-        this.amount = amount;
+    public User getUser() {
+        return user;
     }
 
-    public Transaction(String memo,double amount,String date) {
+
+    public Transaction(String memo,double amount, User user) {
+        this.memo = memo;
+        this.amount = amount;
+        this.user = user;
+    }
+
+    public Transaction(String memo,double amount, Date date, User user) {
         this.memo = memo;
         this.amount = amount;
         this.date = date;
+        this.user = user;
     }
 
     public String getMemo() {
@@ -25,7 +37,7 @@ public class Transaction {
         return amount;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 }

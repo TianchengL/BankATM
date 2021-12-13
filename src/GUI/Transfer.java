@@ -2,7 +2,9 @@ package GUI;
 
 import Account.Account;
 import Collection.AccountCollection;
+import Currency.Money;
 import User.User;
+import User.BankManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Objects;
 
 public class Transfer extends JFrame{
     private JComboBox<String> withdrawAccount;
@@ -17,12 +20,12 @@ public class Transfer extends JFrame{
     private JButton transferButton;
     private JButton cancelButton;
     private JTextField amount;
-    private JPanel transfer;
+    private JPanel transferPanel;
 
     public Transfer(User user){
-        setContentPane(transfer);
+        setContentPane(transferPanel);
         setTitle("View Accounts Form");
-        setSize(350, 450);
+        setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(user.getId());
@@ -42,20 +45,46 @@ public class Transfer extends JFrame{
                 super.keyTyped(e);
             }
         });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(amount.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(transferPanel, "Please enter the deposit amount");
+                }
                 Account in = null;
                 Account out= null;
                 for(Account account : accounts){
-                    if(account.getType().equals(withdrawAccount.getSelectedItem())){
+//                    if(account.getType() == )
+                    if(account.getType().toString().equals(withdrawAccount.getSelectedItem())){
                         out = account;
-                    }else if(account.getType().equals(depositAccount.getSelectedItem())){
+                    }else if(account.getType().toString().equals(depositAccount.getSelectedItem())){
                         in = account;
                     }
                 }
-                out.transfer(in,getAmount());
 
+                Account inAcc = null;
+                Account outAcc= null;
+                List<Account> allAccounts = AccountCollection.getInstance().getAccounts();
+                for(Account account : allAccounts){
+                    if(Objects.equals(account.getId().toString(), out.getId().toString())){
+                        outAcc = account;
+                    }else if(Objects.equals(account.getId().toString(), in.getId().toString())){
+                        inAcc = account;
+                    }
+                }
+                if(outAcc != null && inAcc != null) {
+                    outAcc.transfer(inAcc, getAmount());
+                    AccountCollection.getInstance().saveAccountToCSV(allAccounts);
+                }
+                JOptionPane.showMessageDialog(transferPanel, "Amount transferred!");
             }
         });
 

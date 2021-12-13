@@ -22,7 +22,7 @@ public class Pay extends JFrame{
     public Pay(User user){
         setContentPane(PayPanel);
         setTitle("View Accounts Form");
-        setSize(350, 450);
+        setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(user.getId());
@@ -56,11 +56,26 @@ public class Pay extends JFrame{
             }
         });
 
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Account account=(Account)accountsList.getSelectedItem();
+//                Account account=(Account)accountsList.getSelectedItem();
+                if(receiver.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(PayPanel, "Please enter the receiver ID");
+                }
+                if(amount.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(PayPanel, "Please enter the deposit amount");
+                }
+                Account account = AccountCollection.getInstance().getAccountById(accountsList.getSelectedItem().toString());
                 account.transferTo(getReceiver(),getamount());
+                JOptionPane.showMessageDialog(PayPanel, "Amount paid!");
             }
         });
     }

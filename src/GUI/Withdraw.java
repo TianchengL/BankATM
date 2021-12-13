@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Objects;
 
 public class Withdraw extends JFrame{
     private JTextField amount;
@@ -21,7 +22,7 @@ public class Withdraw extends JFrame{
     public Withdraw(User user){
         setContentPane(WithdrawPanel);
         setTitle("View Accounts Form");
-        setSize(350, 450);
+        setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(user.getId());
@@ -44,11 +45,38 @@ public class Withdraw extends JFrame{
             }
         });
 
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
         withdrawButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Account account=(Account)checking.getSelectedItem();
-                account.withdraw(getWithdraw(),true,"Withdraw:");
+                if(withdrawButton.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(WithdrawPanel, "Please enter the deposit amount");
+                }
+                else{
+                    List<Account> accounts = AccountCollection.getInstance().getAccounts();
+                    for(Account account: accounts){
+                        if(Objects.equals(account.getId().toString(), checking.getSelectedItem().toString())){
+                            if(account.getDeposit().getAmount() < getWithdraw()){
+                                JOptionPane.showMessageDialog(WithdrawPanel, "Not enough balance");
+                            }
+                            else {
+                                account.withdraw(getWithdraw(), true, "Withdraw");
+                                AccountCollection.getInstance().saveAccountToCSV(accounts);
+                                JOptionPane.showMessageDialog(WithdrawPanel, "Amount Withdrawn!");
+                                dispose();
+                            }
+                            break;
+                        }
+                    }
+                }
+//                Account account=(Account)checking.getSelectedItem();
+//                account.withdraw(getWithdraw(),true,"Withdraw:");
 
             }
         });

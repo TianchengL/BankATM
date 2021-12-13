@@ -23,7 +23,6 @@ public class ViewCustomerAccountsFrame extends JFrame {
     public ViewCustomerAccountsFrame(int userID){
         setTitle("Customer Accounts");
         setContentPane(viewAccountsPanel);
-        setTitle("View Accounts Form");
         setResizable(true);
         setVisible(true);
         setSize(1000, 800);

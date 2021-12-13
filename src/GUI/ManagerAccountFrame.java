@@ -1,5 +1,8 @@
 package GUI;
 
+import Collection.TransactionCollection;
+import User.BankManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +15,7 @@ public class ManagerAccountFrame extends JFrame implements ActionListener {
     private final JButton checkCustomerInfoButton;
     private final JButton viewTransactionButton;
     private final JButton profileButton;
-    private final JButton viewAllTransactionButton;
+    private final JButton viewProfitButton;
     private final JButton interestButton;
     private final JButton stocksButton;
     private JTextField interestField;
@@ -28,9 +31,9 @@ public class ManagerAccountFrame extends JFrame implements ActionListener {
         container = getContentPane();
         userLabel = new JLabel();
         checkCustomerInfoButton = new JButton("Check customer accounts");
-        viewTransactionButton = new JButton("View customer transactions");
+        viewTransactionButton = new JButton("View transactions");
         profileButton = new JButton("Profile");
-        viewAllTransactionButton = new JButton("View all transactions");
+        viewProfitButton = new JButton("View profit");
         stocksButton = new JButton("Manage stocks");
         interestButton = new JButton("Set Interest Rate");
         logoutButton = new JButton("Logout");
@@ -51,7 +54,7 @@ public class ManagerAccountFrame extends JFrame implements ActionListener {
         profileButton.setBounds(300, 250, 400, 40);
         checkCustomerInfoButton.setBounds(300, 300, 400, 40);
         viewTransactionButton.setBounds(300, 350, 400, 40);
-        viewAllTransactionButton.setBounds(300, 400, 400, 40);
+        viewProfitButton.setBounds(300, 400, 400, 40);
         stocksButton.setBounds(300, 450, 400, 40);
         interestButton.setBounds(300, 500, 400, 40);
 //        makeTransactionButton.setBounds(250, 350, 200, 40);
@@ -64,7 +67,7 @@ public class ManagerAccountFrame extends JFrame implements ActionListener {
         container.add(profileButton);
         container.add(checkCustomerInfoButton);
         container.add(viewTransactionButton);
-        container.add(viewAllTransactionButton);
+        container.add(viewProfitButton);
         container.add(stocksButton);
         container.add(interestButton);
         container.add(logoutButton);
@@ -74,7 +77,7 @@ public class ManagerAccountFrame extends JFrame implements ActionListener {
         profileButton.addActionListener(this);
         checkCustomerInfoButton.addActionListener(this);
         viewTransactionButton.addActionListener(this);
-        viewAllTransactionButton.addActionListener(this);
+        viewProfitButton.addActionListener(this);
         stocksButton.addActionListener(this);
         interestButton.addActionListener(this);
         logoutButton.addActionListener(this);
@@ -91,10 +94,11 @@ public class ManagerAccountFrame extends JFrame implements ActionListener {
             new CustomerList();
         }
         if (e.getSource() == viewTransactionButton) {
-
+            TransactionCollection.getInstance().addAllTransactions();
+            new ViewTransactions(TransactionCollection.getInstance().getTransactions());
         }
-        if (e.getSource() == viewAllTransactionButton) {
-
+        if (e.getSource() == viewProfitButton) {
+            JOptionPane.showMessageDialog(this, "Total Profit: " + BankManager.getProfit());
         }
         if (e.getSource() == stocksButton) {
 

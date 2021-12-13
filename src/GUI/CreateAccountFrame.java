@@ -2,6 +2,7 @@ package GUI;
 
 import Account.*;
 import Collection.AccountCollection;
+import Collection.TransactionCollection;
 import Collection.UserCollection;
 import Currency.*;
 import User.*;
