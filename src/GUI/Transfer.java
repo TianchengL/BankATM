@@ -45,8 +45,8 @@ public class Transfer extends JFrame{
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Account in;
-                Account out;
+                Account in = null;
+                Account out= null;
                 for(Account account : accounts){
                     if(account.getType().equals(withdrawAccount.getSelectedItem())){
                         out = account;
@@ -54,6 +54,7 @@ public class Transfer extends JFrame{
                         in = account;
                     }
                 }
+                out.transfer(in,getAmount());
 
             }
         });

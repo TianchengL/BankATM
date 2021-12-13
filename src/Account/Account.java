@@ -1,6 +1,7 @@
 package Account;
 
 import Collection.AccountCollection;
+import Collection.TransactionCollection;
 import Currency.*;
 import Transaction.*;
 import Utility.*;
@@ -103,10 +104,12 @@ public abstract class Account implements Serializable, TransactionInterface {
         if (isCharged) {
             Transaction serviceFee = new Transaction("Deposit Fee", TransactionFee);
             deposit.deductMoney(TransactionFee);
+            TransactionCollection.getInstance().addTransaction(serviceFee);
         }
 
         Transaction transaction = new Transaction(memo, amount);
         deposit.addMoney(amount);
+        TransactionCollection.getInstance().addTransaction(transaction);
         return true;
     }
 
@@ -123,9 +126,10 @@ public abstract class Account implements Serializable, TransactionInterface {
         return false;
     }
 
-    public boolean transfer(Account withdraw,Account deposit,double amount){
+    public boolean transfer(Account deposit,double amount){
         withdraw(amount,false,"Transfer to "+ deposit.getType().toString());
-        deposit(amount,deposit.getCurrency(),false,"Transfer from "+ withdraw.getType().toString());
+        deposit(amount,deposit.getCurrency(),false,"Transfer from "+ this.getType().toString());
+
         return true;
     }
 
