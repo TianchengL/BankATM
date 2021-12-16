@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 public abstract class Account implements Serializable, TransactionInterface {
@@ -96,7 +97,6 @@ public abstract class Account implements Serializable, TransactionInterface {
 
 //        Transaction transaction = new Transaction(memo, amount);
         TransactionFactory.createTransaction(memo, amount, getUser());
-        deposit.deductMoney(amount);
 //        TransactionCollection.getInstance().addTransaction(transaction);
         TransactionCollection.getInstance().saveTransactionToCSV(TransactionCollection.getInstance().getTransactions());
         if (deposit.deductMoney(amount)) {
@@ -126,12 +126,23 @@ public abstract class Account implements Serializable, TransactionInterface {
         return true;
     }
 
-    public boolean transferTo(int userId, double amount) {
+    public boolean transferTo(int userId, double amount, List<Account> allAccounts) {
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(userId);
+        Account acc = null;
         for (Account account : accounts) {
-            if (this.currency.equals(account.getCurrency())) {
+            if(Objects.equals(this.currency.toString(), account.getCurrency().toString())){
+//            if (this.currency.equals(account.getCurrency())) {
+                acc = account;
+                break;
+
+            }
+        }
+//        Account mainAcc = null;
+        for(Account account : allAccounts){
+            if(Objects.equals(account.getId().toString(), acc.getId().toString())){
                 if (withdraw(amount, true, "Transfer to" + account.getId())) {
                     account.deposit(amount, account.getCurrency(), true, "Transfer from" + accountID);
+                    System.out.println("hello");
                     return true;
                 }
             }

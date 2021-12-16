@@ -28,7 +28,7 @@ public class Withdraw extends JFrame{
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(user.getId());
         for(Account account : accounts){
             if(account.getType()== Account.AccountType.CHECKING_ACCOUNT){
-                checking.addItem(account.getId().toString());
+                checking.addItem(account.getId().toString().substring(0,8));
             }
         }
 
@@ -61,7 +61,7 @@ public class Withdraw extends JFrame{
                 else{
                     List<Account> accounts = AccountCollection.getInstance().getAccounts();
                     for(Account account: accounts){
-                        if(Objects.equals(account.getId().toString(), checking.getSelectedItem().toString())){
+                        if(Objects.equals(account.getId().toString().substring(0,8), checking.getSelectedItem().toString())){
                             if(account.getDeposit().getAmount() < getWithdraw()){
                                 JOptionPane.showMessageDialog(WithdrawPanel, "Not enough balance");
                             }

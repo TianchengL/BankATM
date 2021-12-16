@@ -62,7 +62,6 @@ public class Transfer extends JFrame{
                 Account in = null;
                 Account out= null;
                 for(Account account : accounts){
-//                    if(account.getType() == )
                     if(account.getType().toString().equals(withdrawAccount.getSelectedItem())){
                         out = account;
                     }else if(account.getType().toString().equals(depositAccount.getSelectedItem())){
@@ -85,6 +84,7 @@ public class Transfer extends JFrame{
                     AccountCollection.getInstance().saveAccountToCSV(allAccounts);
                 }
                 JOptionPane.showMessageDialog(transferPanel, "Amount transferred!");
+                dispose();
             }
         });
 

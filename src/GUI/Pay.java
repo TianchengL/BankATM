@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Objects;
 
 public class Pay extends JFrame{
     private JButton cancelButton;
@@ -28,7 +29,7 @@ public class Pay extends JFrame{
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(user.getId());
         for(Account account : accounts){
             if(account.getType()== Account.AccountType.CHECKING_ACCOUNT || account.getType()== Account.AccountType.SAVING_ACCOUNT){
-                accountsList.addItem(account.getId().toString());
+                accountsList.addItem(account.getId().toString().substring(0,8));
             }
         }
         amount.addKeyListener(new KeyAdapter() {
@@ -73,8 +74,18 @@ public class Pay extends JFrame{
                 if(amount.getText().isEmpty()){
                     JOptionPane.showMessageDialog(PayPanel, "Please enter the deposit amount");
                 }
-                Account account = AccountCollection.getInstance().getAccountById(accountsList.getSelectedItem().toString());
-                account.transferTo(getReceiver(),getamount());
+                List<Account> accounts = AccountCollection.getInstance().getAccounts();
+                for(Account account: accounts){
+                    if(Objects.equals(account.getId().toString().substring(0,8), accountsList.getSelectedItem().toString())){
+
+                        account.transferTo(getReceiver(),getamount(), accounts);
+                        AccountCollection.getInstance().saveAccountToCSV(accounts);
+                        break;
+                    }
+                }
+
+//                Account account = AccountCollection.getInstance().getAccountById(accountsList.getSelectedItem().toString());
+//                account.transferTo(getReceiver(),getamount());
                 JOptionPane.showMessageDialog(PayPanel, "Amount paid!");
             }
         });

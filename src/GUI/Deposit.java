@@ -30,7 +30,7 @@ public class Deposit extends JFrame{
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(user.getId());
         for(Account account : accounts){
             if(account.getType()== Account.AccountType.CHECKING_ACCOUNT){
-                checking.addItem(account.getId().toString());
+                checking.addItem(account.getId().toString().substring(0,8));
             }
         }
 
@@ -65,7 +65,7 @@ public class Deposit extends JFrame{
                 }else{
                     List<Account> accounts = AccountCollection.getInstance().getAccounts();
                     for(Account account: accounts){
-                        if(Objects.equals(account.getId().toString(), checking.getSelectedItem().toString())){
+                        if(Objects.equals(account.getId().toString().substring(0,8), checking.getSelectedItem().toString())){
                             account.deposit(getDeposit(),account.getCurrency(),true,"Deposit");
                             break;
                         }
@@ -74,7 +74,7 @@ public class Deposit extends JFrame{
 ////                    Account account=(Account)checking.getSelectedItem();
 //                    account.deposit(getDeposit(),account.getCurrency(),true,"Deposit:");
                     AccountCollection.getInstance().saveAccountToCSV(accounts);
-                    JOptionPane.showMessageDialog(DepositPanel, "Amount deposited");
+                    JOptionPane.showMessageDialog(DepositPanel, "Amount deposited!");
                     dispose();
                 }
             }
