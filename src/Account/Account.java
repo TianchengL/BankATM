@@ -2,8 +2,10 @@ package Account;
 
 import Collection.AccountCollection;
 import Collection.LoanCollection;
+import Collection.StockCollection;
 import Collection.TransactionCollection;
 import Currency.*;
+import Stock.Stock;
 import Transaction.*;
 import Utility.*;
 import User.*;
@@ -25,6 +27,7 @@ public abstract class Account implements Serializable, TransactionInterface {
     private Money deposit;
     private final User user;
     private ArrayList<Transaction> transactions;
+    private ArrayList<Stock> stockOrderHistory;
 
 
     public enum AccountType {CHECKING_ACCOUNT, SAVING_ACCOUNT, STOCK_ACCOUNT}
@@ -35,6 +38,7 @@ public abstract class Account implements Serializable, TransactionInterface {
         this.openDate = openDate;
         this.deposit = deposit;
         this.user = user;
+        stockOrderHistory = new ArrayList<>();
     }
 
     public Money getDeposit() {
@@ -156,6 +160,34 @@ public abstract class Account implements Serializable, TransactionInterface {
         TransactionFactory.createTransaction("Transfer Fee", TransactionFee, getUser());
         BankManager.addProfit(TransactionFee);
         return true;
+    }
+
+    public boolean buyStock(String stockName,int amount){
+       Stock stock = StockCollection.getInstance().findStockByName(stockName);
+       double cost =amount*stock.getPrice();
+       if(deposit.getAmount()>=cost){
+           withdraw(cost,true,"Buy stocks: "+stockName+" amount:"+amount);
+           stockOrderHistory.add(new Stock(stock.getName(),stock.getPrice(),amount));
+           return true;
+       }
+        return false;
+    }
+
+    public boolean sellStock(String stockName,int amount){
+
+        for(Stock stock:stockOrderHistory){
+            if(stock.getName().equals(stockName)){
+                Stock presentStock = StockCollection.getInstance().findStockByName(stockName);
+                double income = presentStock.getPrice()*amount;
+                if(stock.isSold==false&&stock.getAmount()>=amount){
+                    deposit(income,currency,true,"Sell stocks:"+ stockName+ " amount:"+amount);
+                    stock.deductAmount(amount);
+                    stock.setSold();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 

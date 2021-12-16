@@ -1,5 +1,6 @@
 package GUI;
 
+import Collection.StockCollection;
 import Collection.TransactionCollection;
 import User.BankManager;
 
@@ -101,6 +102,7 @@ public class ManagerAccountFrame extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "Total Profit: " + BankManager.getProfit());
         }
         if (e.getSource() == stocksButton) {
+            StockCollection.getInstance().addAllStocks();
 
         }
         if (e.getSource() == interestButton) {
