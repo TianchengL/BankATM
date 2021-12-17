@@ -104,7 +104,6 @@ public class ManagerAccountFrame extends JFrame implements ActionListener {
         if (e.getSource() == stocksButton) {
             StockCollection.getInstance().addAllStocks();
             new ManageStock();
-
         }
         if (e.getSource() == interestButton) {
             new InterestRateFrame();

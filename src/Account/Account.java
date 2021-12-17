@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * This class is a abstraction of an account
+ * This class is an abstraction of account
  */
 public abstract class Account implements Serializable, TransactionInterface {
 
@@ -91,16 +91,12 @@ public abstract class Account implements Serializable, TransactionInterface {
     @Override
     public boolean withdraw(double amount, boolean isCharged, String memo) {
         if (isCharged) {
-//            Transaction serviceFee = new Transaction("Withdraw Fee", TransactionFee);
             TransactionFactory.createTransaction("Withdraw Fee", TransactionFee, getUser());
             deposit.deductMoney(TransactionFee);
             BankManager.addProfit(TransactionFee);
-//            TransactionCollection.getInstance().addTransaction(serviceFee);
         }
 
-//        Transaction transaction = new Transaction(memo, amount);
         TransactionFactory.createTransaction(memo, amount, getUser());
-//        TransactionCollection.getInstance().addTransaction(transaction);
         TransactionCollection.getInstance().saveTransactionToCSV(TransactionCollection.getInstance().getTransactions());
         return deposit.deductMoney(amount);
     }
@@ -110,18 +106,13 @@ public abstract class Account implements Serializable, TransactionInterface {
     public boolean deposit(double amount, Currency cur, boolean isCharged, String memo) {
 
         if (isCharged) {
-//            Transaction serviceFee = new Transaction("Deposit Fee", TransactionFee);
             TransactionFactory.createTransaction("Deposit Fee", TransactionFee, getUser());
             deposit.deductMoney(TransactionFee);
             BankManager.addProfit(TransactionFee);
-//            TransactionCollection.getInstance().addTransaction(serviceFee);
         }
 
-//        Transaction transaction = new Transaction(memo, amount);
         TransactionFactory.createTransaction(memo, amount, getUser());
         deposit.addMoney(amount);
-//        TransactionCollection.getInstance().addTransaction(transaction);
-//        TransactionCollection.getInstance().addAllTransactions();
         System.out.println(TransactionCollection.getInstance().getTransactions().size());
         TransactionCollection.getInstance().saveTransactionToCSV(TransactionCollection.getInstance().getTransactions());
         return true;
@@ -133,18 +124,18 @@ public abstract class Account implements Serializable, TransactionInterface {
         Account acc = null;
         for (Account account : accounts) {
             if(Objects.equals(this.currency.toString(), account.getCurrency().toString())){
-//            if (this.currency.equals(account.getCurrency())) {
                 acc = account;
                 break;
-
             }
         }
-//        Account mainAcc = null;
+        if(acc == null){
+            return false;
+        }
         for(Account account : allAccounts){
             if(Objects.equals(account.getId().toString(), acc.getId().toString())){
-                if (withdraw(amount, true, "Transfer to" + account.getId())) {
-                    account.deposit(amount, account.getCurrency(), true, "Transfer from" + accountID);
-                    System.out.println("hello");
+                if (withdraw(amount, true, "Transfer to " + account.getId().toString().substring(0,8))) {
+                    account.deposit(amount, account.getCurrency(), true, "Transfer from " + accountID.toString().substring(0,8));
+                    TransactionFactory.createTransaction("Transaction Fee", TransactionFee, getUser());
                     return true;
                 }
             }

@@ -2,22 +2,15 @@ package GUI;
 
 import Account.*;
 import Collection.AccountCollection;
-import Collection.TransactionCollection;
-import Collection.UserCollection;
 import Currency.*;
-import Transaction.TransactionFactory;
 import User.*;
 
 import javax.swing.*;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.FileWriter;
-import java.text.NumberFormat;
 import java.util.List;
 
 public class CreateAccountFrame extends JFrame {
@@ -29,6 +22,7 @@ public class CreateAccountFrame extends JFrame {
     private JButton createAccountButton;
     private JTextField InitialDepositTextField;
     private JLabel createAccount;
+    private JButton backButton;
 
 
     public CreateAccountFrame(User user){
@@ -59,6 +53,13 @@ public class CreateAccountFrame extends JFrame {
                     e.consume();
                 }
                 super.keyTyped(e);
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
         });
 

@@ -28,7 +28,6 @@ public class ViewCustomerAccountsFrame extends JFrame {
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-//        scrollPane = new JScrollPane(accountArea);
         userIDLabel.setText(String.valueOf(userID));
 
         //accountList.add
@@ -39,7 +38,8 @@ public class ViewCustomerAccountsFrame extends JFrame {
                 accountType = "Savings Account";
             else if(account.getType() == Account.AccountType.CHECKING_ACCOUNT)
                 accountType = "Checking Account";
-//            accountsInfo.append(account.toString() + "\n\n");
+            else if(account.getType() == Account.AccountType.STOCK_ACCOUNT)
+                accountType = "Stock Account";
             System.out.println(account);
             idField.append("" + account.getId().toString().substring(0,8) + "\n\n");
             accountField.append(accountType + "\n\n");

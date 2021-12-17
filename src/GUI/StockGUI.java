@@ -32,9 +32,16 @@ public class StockGUI extends JFrame{
         setVisible(true);
 
         StockAccount stockAccount = getStockAccount(user);
-        List<Stock> stockHoldList = stockAccount.getStockOrderHistory();
-        for(Stock stock:stockHoldList){
-            holdStocks.append(stock.getName()+ " "+stock.getAmount()+ "\n\n");
+        List<Stock> stockHoldList;
+        if(stockAccount != null) {
+            stockHoldList = stockAccount.getStockOrderHistory();
+            for (Stock stock : stockHoldList) {
+                holdStocks.append(stock.getName() + " " + stock.getAmount() + "\n\n");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(Stock, "Please create a stock account");
+            dispose();
         }
         List<Stock> List = StockCollection.getInstance().getStocks();
         for(Stock stock:List){
@@ -64,19 +71,32 @@ public class StockGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 StockAccount stockAccount = getStockAccount(user);
+                List<Stock> stocks = StockCollection.getInstance().getStocks();
 
-                if(amount.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(Stock, "Please enter the stock amount");
-
-                }
                 if(stockName.getText().isEmpty()){
                     JOptionPane.showMessageDialog(Stock, "Please enter the stock name");
                 }
-
-                if(stockAccount.buyStock(getStockname(),getAmount())){
-                    JOptionPane.showMessageDialog(Stock, "Paid!");
-                    dispose();
+                else {
+                    int flag = 0;
+                    for (Stock stock : stocks) {
+                        System.out.println(stock.getName());
+                        if (stockName.getText().toString().equals(stock.getName())) {
+                            if (stockAccount.buyStock(getStockname(), getAmount())) {
+                                JOptionPane.showMessageDialog(Stock, "Stocks purchased!");
+                                flag = 1;
+                                dispose();
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(Stock, "Not enough balance");
+                                flag = 1;
+                            }
+                            break;
+                        }
+                    }
+                    if(flag == 0)
+                        JOptionPane.showMessageDialog(Stock, "Please enter a valid stock name");
                 }
+
             }
         });
 
@@ -88,11 +108,11 @@ public class StockGUI extends JFrame{
                 if(amount.getText().isEmpty()){
                     JOptionPane.showMessageDialog(Stock, "Please enter the stock amount");
                 }
-                if(stockName.getText().isEmpty()){
+                else if(stockName.getText().isEmpty()){
                     JOptionPane.showMessageDialog(Stock, "Please enter the stock name");
                 }
 
-                if(stockAccount.sellStock(getStockname(),getAmount())){
+                else if(stockAccount.sellStock(getStockname(),getAmount())){
                     JOptionPane.showMessageDialog(Stock, "Sold!");
                     dispose();
                 }

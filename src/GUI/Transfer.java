@@ -2,6 +2,7 @@ package GUI;
 
 import Account.*;
 import Collection.AccountCollection;
+import Collection.TransactionCollection;
 import Currency.Money;
 import User.User;
 import User.BankManager;
@@ -93,6 +94,7 @@ public class Transfer extends JFrame{
                     }else{
                     outAcc.transfer(inAcc, getAmount());
                     AccountCollection.getInstance().saveAccountToCSV(allAccounts);
+                    TransactionCollection.getInstance().saveTransactionToCSV(TransactionCollection.getInstance().getTransactions());
                     JOptionPane.showMessageDialog(transferPanel, "Amount transferred!");
                     dispose();
                     }

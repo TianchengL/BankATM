@@ -8,6 +8,15 @@ public class Stock implements Serializable {
     private double price;
     private int amount;
     public boolean isSold;
+    private int userID;
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
     public Stock(String name, double price) {
         this.name = name;
@@ -21,8 +30,20 @@ public class Stock implements Serializable {
         isSold = false;
     }
 
+    public Stock(String name, double price, int amount, int userID) {
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+        isSold = false;
+        this.userID = userID;
+    }
+
     public void deductAmount(int amount) {
         this.amount -= amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public int getAmount() {

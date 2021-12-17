@@ -27,7 +27,9 @@ public class ViewTransactions extends JFrame{
         setVisible(true);
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+//        JScrollBar vertical = scollPan.getVerticalScrollBar();
+//        vertical.setValue( vertical.getMaximum() );
+        transactionPanel.setAutoscrolls(true);
 
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
