@@ -19,6 +19,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
     private final JButton checkTransactionButton;
     private final JButton profileButton;
     private final JButton createAccountButton;
+    private final JButton closeAccountButton;
     private final JButton loanButton;
     private final JButton makeTransactionButton;
     private final JButton logoutButton;
@@ -38,6 +39,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         checkTransactionButton = new JButton("View transactions");
         profileButton = new JButton("Profile");
         createAccountButton = new JButton("Create a checkings/savings/stock account");
+        closeAccountButton = new JButton("Close Account");
         loanButton = new JButton("Manage Loans");
         makeTransactionButton = new JButton("Make transaction");
         logoutButton = new JButton("Logout");
@@ -64,10 +66,11 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         accountButton.setBounds(300, 300, 400, 40);
         checkTransactionButton.setBounds(300, 350, 400, 40);
         createAccountButton.setBounds(300, 400, 400, 40);
-        loanButton.setBounds(300, 450, 400, 40);
-        makeTransactionButton.setBounds(300, 500, 400, 40);
-        logoutButton.setBounds(700, 600, 100, 35);
-        stockButton.setBounds(300,550,400,40);
+        closeAccountButton.setBounds(300, 450, 400, 40);
+        loanButton.setBounds(300, 500, 400, 40);
+        makeTransactionButton.setBounds(300, 550, 400, 40);
+        logoutButton.setBounds(700, 650, 100, 35);
+        stockButton.setBounds(300,600,400,40);
 
     }
 
@@ -77,6 +80,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         container.add(accountButton);
         container.add(checkTransactionButton);
         container.add(createAccountButton);
+        container.add(closeAccountButton);
         container.add(loanButton);
         container.add(makeTransactionButton);
         container.add(logoutButton);
@@ -88,6 +92,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         accountButton.addActionListener(this);
         checkTransactionButton.addActionListener(this);
         createAccountButton.addActionListener(this);
+        closeAccountButton.addActionListener(this);
         loanButton.addActionListener(this);
         makeTransactionButton.addActionListener(this);
         logoutButton.addActionListener(this);
@@ -110,6 +115,9 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == createAccountButton) {
             new CreateAccountFrame(this.user);
+        }
+        if (e.getSource() == closeAccountButton) {
+            new closeAccount(this.user);
         }
         if (e.getSource() == loanButton) {
             new LoanFrame(user);
