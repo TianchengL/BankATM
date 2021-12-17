@@ -67,6 +67,7 @@ public class StockGUI extends JFrame{
 
                 if(amount.getText().isEmpty()){
                     JOptionPane.showMessageDialog(Stock, "Please enter the stock amount");
+
                 }
                 if(stockName.getText().isEmpty()){
                     JOptionPane.showMessageDialog(Stock, "Please enter the stock name");
@@ -74,6 +75,7 @@ public class StockGUI extends JFrame{
 
                 if(stockAccount.buyStock(getStockname(),getAmount())){
                     JOptionPane.showMessageDialog(Stock, "Paid!");
+                    dispose();
                 }
             }
         });
@@ -92,6 +94,7 @@ public class StockGUI extends JFrame{
 
                 if(stockAccount.sellStock(getStockname(),getAmount())){
                     JOptionPane.showMessageDialog(Stock, "Sold!");
+                    dispose();
                 }
             }
         });

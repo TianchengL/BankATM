@@ -15,6 +15,7 @@ public class ManageStock extends JFrame{
     private JButton addButton;
     private JButton cancelButton;
     private JPanel ManageStock;
+    private JTextArea stockList;
 
     public ManageStock(){
         setContentPane(ManageStock);
@@ -22,6 +23,11 @@ public class ManageStock extends JFrame{
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
+        List<Stock> List = StockCollection.getInstance().getStocks();
+        for(Stock stock:List){
+            stockList.append(stock.getName()+ " "+stock.getPrice()+ "\n\n");
+        }
+
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -36,6 +42,8 @@ public class ManageStock extends JFrame{
                 StockCollection.getInstance().addStock(new Stock(getStockname(),getPrice()));
                 List<Stock> currentStockList= StockCollection.getInstance().getStocks();
                 StockCollection.getInstance().saveStockToCSV(currentStockList);
+                JOptionPane.showMessageDialog(ManageStock, "stock added");
+                dispose();
             }
         });
 

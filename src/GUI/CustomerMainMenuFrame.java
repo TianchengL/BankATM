@@ -1,5 +1,6 @@
 package GUI;
 
+import Collection.StockCollection;
 import Collection.TransactionCollection;
 import Collection.UserCollection;
 import Database.Database;
@@ -120,6 +121,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
             dispose();
         }
         if(e.getSource() == stockButton){
+            StockCollection.getInstance().addAllStocks();
             new StockGUI(user);
         }
     }

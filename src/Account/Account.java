@@ -100,6 +100,7 @@ public abstract class Account implements Serializable, TransactionInterface {
 //            Transaction serviceFee = new Transaction("Withdraw Fee", TransactionFee);
             TransactionFactory.createTransaction("Withdraw Fee", TransactionFee, getUser());
             deposit.deductMoney(TransactionFee);
+            BankManager.addProfit(TransactionFee);
 //            TransactionCollection.getInstance().addTransaction(serviceFee);
         }
 

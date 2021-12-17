@@ -87,6 +87,7 @@ public class Pay extends JFrame{
 //                Account account = AccountCollection.getInstance().getAccountById(accountsList.getSelectedItem().toString());
 //                account.transferTo(getReceiver(),getamount());
                 JOptionPane.showMessageDialog(PayPanel, "Amount paid!");
+                dispose();
             }
         });
     }

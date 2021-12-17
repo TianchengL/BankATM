@@ -80,10 +80,11 @@ public class CreateAccountFrame extends JFrame {
                         }
                     }
                     if(saving.getDeposit().getAmount()>5000){
-                        AccountFactory.createAccount(user.getId(), getDeposit(),
+                        StockAccount newStockAccount =(StockAccount) AccountFactory.createAccount(user.getId(), getDeposit(),
                                 getCurrency(), (Account.AccountType) comboBoxAccountType.getSelectedItem());
                         AccountCollection.getInstance().saveAccountToCSV(AccountCollection.getInstance().getAccounts());
                         JOptionPane.showMessageDialog(createAccountPanel, "Account Created!");
+                        newStockAccount.withdraw(0,true,"Service fee");
                         dispose();
 
                     }else{
