@@ -5,6 +5,7 @@ import Collection.AccountCollection;
 import Collection.TransactionCollection;
 import Collection.UserCollection;
 import Currency.*;
+import Transaction.TransactionFactory;
 import User.*;
 
 import javax.swing.*;
@@ -98,6 +99,7 @@ public class CreateAccountFrame extends JFrame {
                     //create new account and add it to collection
                     AccountFactory.createAccount(user.getId(), getDeposit(),
                             getCurrency(), (Account.AccountType) comboBoxAccountType.getSelectedItem());
+//                    TransactionFactory.createTransaction("Account creation Fee", 5, user);
 
                     //save to disk (csv file)
                     AccountCollection.getInstance().saveAccountToCSV(AccountCollection.getInstance().getAccounts());
