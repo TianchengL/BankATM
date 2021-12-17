@@ -65,13 +65,14 @@ public class CreateAccountFrame extends JFrame {
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("test"+comboBoxCurrencyType.getSelectedItem());
 
                 if(InitialDepositTextField.getText().isEmpty()){
                     JOptionPane.showMessageDialog(createAccountPanel, "Please add an initial deposit amount");
                 }
                 else if(getDeposit() < 100.0){
                     JOptionPane.showMessageDialog(createAccountPanel, "Initial Deposit cannot less than 100");
-                }else if(comboBoxCurrencyType.getSelectedItem()== Account.AccountType.STOCK_ACCOUNT){
+                }else if(comboBoxAccountType.getSelectedItem()== Account.AccountType.STOCK_ACCOUNT){
                     List<Account> userAccount=AccountCollection.getInstance().getUserAccounts(user.getId());
                     SavingAccount saving = null;
                     for(Account account:userAccount){
@@ -79,7 +80,10 @@ public class CreateAccountFrame extends JFrame {
                             saving = (SavingAccount) account;
                         }
                     }
-                    if(saving.getDeposit().getAmount()>5000){
+                    if(saving==null){
+                        JOptionPane.showMessageDialog(createAccountPanel, "You don't have a saving account. You must have more than $5000 in your saving account");
+
+                    } else if(saving.getDeposit().getAmount()>5000){
                         StockAccount newStockAccount =(StockAccount) AccountFactory.createAccount(user.getId(), getDeposit(),
                                 getCurrency(), (Account.AccountType) comboBoxAccountType.getSelectedItem());
                         AccountCollection.getInstance().saveAccountToCSV(AccountCollection.getInstance().getAccounts());
