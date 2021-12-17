@@ -5,6 +5,7 @@ import Account.Account;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+//an abstract class for user
 public abstract class User implements Serializable {
     private final String firstname;
     private final String lastname;

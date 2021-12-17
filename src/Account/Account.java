@@ -16,7 +16,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * This class is a abstraction of an account
+ */
 public abstract class Account implements Serializable, TransactionInterface {
 
     protected static final double TransactionFee = 5.00;
@@ -41,42 +43,34 @@ public abstract class Account implements Serializable, TransactionInterface {
         stockOrderHistory = new ArrayList<>();
     }
 
+    //getter and setter
     public List<Stock> getStockOrderHistory() {
         return stockOrderHistory;
     }
-
     public Money getDeposit() {
         return deposit;
     }
-
     public void setDeposit(Money deposit) {
         this.deposit = deposit;
     }
-
     public User getUser() {
         return user;
     }
-
     public ID getId() {
         return accountID;
     }
-
     public void setId(ID id) {
         this.accountID = id;
     }
-
     public Currency getCurrency() {
         return currency;
     }
-
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
-
     public Date getOpenDate() {
         return openDate;
     }
-
     public void setOpenDate(Date openDate) {
         this.openDate = openDate;
     }
@@ -93,7 +87,7 @@ public abstract class Account implements Serializable, TransactionInterface {
                 '}';
     }
 
-
+    //account money can be withdrawn
     @Override
     public boolean withdraw(double amount, boolean isCharged, String memo) {
         if (isCharged) {
@@ -108,12 +102,10 @@ public abstract class Account implements Serializable, TransactionInterface {
         TransactionFactory.createTransaction(memo, amount, getUser());
 //        TransactionCollection.getInstance().addTransaction(transaction);
         TransactionCollection.getInstance().saveTransactionToCSV(TransactionCollection.getInstance().getTransactions());
-        if (deposit.deductMoney(amount)) {
-            return true;
-        }
-        return false;
+        return deposit.deductMoney(amount);
     }
 
+    //account could deposit money
     @Override
     public boolean deposit(double amount, Currency cur, boolean isCharged, String memo) {
 
@@ -135,6 +127,7 @@ public abstract class Account implements Serializable, TransactionInterface {
         return true;
     }
 
+    //account could transfer money
     public boolean transferTo(int userId, double amount, List<Account> allAccounts) {
         List<Account> accounts = AccountCollection.getInstance().getUserAccounts(userId);
         Account acc = null;
@@ -158,6 +151,7 @@ public abstract class Account implements Serializable, TransactionInterface {
         }
         return false;
     }
+
 
     public boolean transfer(Account in,double amount){
         withdraw(amount,false,"Transfer to "+ in.getType().toString());

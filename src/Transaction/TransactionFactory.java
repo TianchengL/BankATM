@@ -7,6 +7,7 @@ import User.User;
 
 import java.util.Date;
 
+//purpose of creating and transaction
 public class TransactionFactory {
     public static Transaction createTransaction(String memo, double amount, User user){
 //        User user = UserCollection.getInstance().getUserById(userID);

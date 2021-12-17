@@ -8,6 +8,7 @@ import Utility.*;
 
 import java.util.Date;
 
+//factory design pattern to create an account
 public class AccountFactory {
 
     //only responsible for create checking and saving accounts
@@ -36,9 +37,4 @@ public class AccountFactory {
         return account;
     }
 
-    public static Account createStockAccount(int userID, double startDeposit, Currency currency, String collateral){
-        User user = UserCollection.getInstance().getUserById(userID);
-        ID accountId = new ID();
-        return null;
-    }
 }

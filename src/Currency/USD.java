@@ -3,7 +3,7 @@ package Currency;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-
+//concrete class for USA currency
 public class USD extends Currency{
 
     private static USD instance;
@@ -26,12 +26,5 @@ public class USD extends Currency{
         return "USD";
     }
 
-    public static void main(String[] args) {
-        USD usd = new USD();
-        KRW jpy = new KRW();
-        Money money = new Money(1000000000);
-        String d = usd.showMoney(money);
-        System.out.println(jpy.showMoney(money));
-    }
 
 }

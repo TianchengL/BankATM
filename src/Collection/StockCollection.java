@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+//a collection for each stock
 public class StockCollection {
     private List<Stock> stocks;
     private static StockCollection instance;
@@ -20,7 +21,7 @@ public class StockCollection {
         this.stocks = new ArrayList<>();
     }
 
-
+    //singleton pattern
     public static StockCollection getInstance() {
         if(instance == null) instance = new StockCollection();
         return instance;
@@ -30,6 +31,7 @@ public class StockCollection {
         return stocks;
     }
 
+    //add entire stock from cvs file
     public void addAllStocks(){
         this.stocks = getStockFromFile();
     }
@@ -50,6 +52,7 @@ public class StockCollection {
         }
     }
 
+    //get stock from disk
     public List<Stock> getStockFromFile(){
         Object obj;
         List<Stock> stocks = new ArrayList<>();
@@ -72,6 +75,7 @@ public class StockCollection {
 
     }
 
+    //return stock according to name
     public Stock findStockByName(String stockName) {
 
         for (Stock stock : stocks) {
@@ -81,6 +85,8 @@ public class StockCollection {
         }
         return null;
     }
+
+    //add one stock to list
     public void addStock(Stock stock){
         stocks.removeIf(current -> current.getName().equals(stock.getName()));
         for(Stock stock1:stocks){

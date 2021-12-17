@@ -7,7 +7,7 @@ import Currency.Money;
 import User.User;
 import Utility.ID;
 
-
+//for the purpose of creating loan
 public class LoanFactory {
     public static Loan createLoanAccount(int userID, double interest, String collateral, double loanAmount, Currency currency){
         User user = UserCollection.getInstance().getUserById(userID);

@@ -2,6 +2,7 @@ package User;
 
 import java.sql.*;
 
+//concrete class for customer
 public class Customers extends User {
 
 

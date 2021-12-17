@@ -13,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+//a collection of each transaction
 public class TransactionCollection {
     private List<Transaction> transactions;
     private static TransactionCollection instance;
@@ -75,6 +76,7 @@ public class TransactionCollection {
 
     }
 
+    //get certain transaction list according to user ID
     public List<Transaction> getUserTransactions(int userID){
 
         List<Transaction> list = new ArrayList<>();

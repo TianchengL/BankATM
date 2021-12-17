@@ -7,12 +7,13 @@ import Utility.ID;
 import User.*;
 import java.util.Date;
 
-
+//concrete class for stock account
 public class StockAccount extends Account {
     public StockAccount(ID accountID, Currency currency, Date openDate, Money deposit, User user) {
         super(accountID, currency, openDate, deposit, user);
     }
 
+    //buy stock according to stock name
     public boolean buyStock(String stockName,int amount){
         Stock stock = StockCollection.getInstance().findStockByName(stockName);
         double cost =amount*stock.getPrice();
@@ -24,6 +25,7 @@ public class StockAccount extends Account {
         return false;
     }
 
+    //sell stock according to stock name
     public boolean sellStock(String stockName,int amount){
 
         for(Stock stock:super.getStockOrderHistory()){

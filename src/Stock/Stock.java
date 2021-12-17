@@ -2,6 +2,7 @@ package Stock;
 
 import java.io.Serializable;
 
+//concrete class for stock
 public class Stock implements Serializable {
     private final String name;
     private double price;

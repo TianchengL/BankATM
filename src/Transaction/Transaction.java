@@ -5,6 +5,7 @@ import User.User;
 import java.io.Serializable;
 import java.util.Date;
 
+//class for transaction
 public class Transaction implements Serializable {
     private final String memo;
     private final double amount;

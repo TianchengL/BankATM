@@ -3,7 +3,7 @@ package LoginOrSignUp;
 
 import Database.Database;
 
-
+//used to log in when user already have an account
 public class Login {
 
     private final String username;

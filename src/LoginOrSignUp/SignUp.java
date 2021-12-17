@@ -4,6 +4,7 @@ import Database.Database;
 import User.*;
 import Collection.UserCollection;
 
+//this class is to sign up a user and add it into database
 public class SignUp {
 
     private final String firstName;
@@ -45,16 +46,6 @@ public class SignUp {
         }
     }
 
-
-   /** Might need to provide some method to check if input password meet some constraints
-    * such as at least one Capital letter. ect...**/
-
-    //Added condition to check this during signup
-    //check if password and confirm password the same
-    //return true if its same
-    public boolean checkPassword(){
-        return false;
-    }
 
 
 

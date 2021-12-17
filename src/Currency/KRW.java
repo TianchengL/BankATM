@@ -3,6 +3,7 @@ package Currency;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+//concrete class for korean currency
 public class KRW extends Currency{
 
     private static KRW instance;

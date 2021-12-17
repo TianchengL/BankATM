@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+//a collection for loan
 public class LoanCollection {
     private List<Loan> loans;
     private static LoanCollection instance;

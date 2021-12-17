@@ -7,6 +7,7 @@ import User.*;
 import java.io.Serializable;
 import java.util.Date;
 
+//concrete class for checking account
 public class CheckingAccount extends Account implements Serializable {
     public CheckingAccount(ID accountID, Currency currency, Date openDate, Money deposit, User user) {
         super(accountID, currency, openDate, deposit, user);

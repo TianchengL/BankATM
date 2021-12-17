@@ -11,9 +11,11 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Scanner;
 
+//The purpose of this class is to initialize the application
+//and check some internal logic
 public class Bank {
 
-
+    //run the program
     public void run(){
         Database database = new Database();
         //Database.addPreviousUsers();

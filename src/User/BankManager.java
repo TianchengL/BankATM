@@ -4,6 +4,7 @@ package User;
 import java.io.FileWriter;
 import java.io.IOException;
 
+//concrete class for bank manager
 public class BankManager extends User {
     private static Double profit;
 
@@ -15,6 +16,7 @@ public class BankManager extends User {
         BankManager.profit = profit;
     }
 
+    //add profit to a txt file
     public static void addProfit(Double profit) {
         BankManager.profit += profit;
         try {

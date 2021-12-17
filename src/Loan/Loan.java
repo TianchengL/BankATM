@@ -7,6 +7,7 @@ import Utility.ID;
 
 import java.io.Serializable;
 
+//concrete class for loan
 public class Loan implements Serializable {
     private ID loanID;
     private String collateral;
@@ -15,46 +16,37 @@ public class Loan implements Serializable {
     private Currency currency;
     private final User user;
 
+    //getter and setter
     public Currency getCurrency() {
         return currency;
     }
-
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
-
     public ID getLoanID() {
         return loanID;
     }
-
     public void setLoanID(ID loanID) {
         this.loanID = loanID;
     }
-
     public String getCollateral() {
         return collateral;
     }
-
     public void setCollateral(String collateral) {
         this.collateral = collateral;
     }
-
     public Money getLoanAmount() {
         return loanAmount;
     }
-
     public void setLoanAmount(Money loanAmount) {
         this.loanAmount = loanAmount;
     }
-
     public static double getInterest() {
         return interest;
     }
-
     public static void setInterest(double interest) {
         Loan.interest = interest;
     }
-
     public User getUser() {
         return user;
     }

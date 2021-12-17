@@ -99,14 +99,5 @@ public class AccountCollection {
         return list;
     }
 
-    public static void main(String[] args) {
-
-
-        List<Account> account = AccountCollection.getInstance().getAccountFromFile();
-        for (Account a : account) {
-            System.out.println("1111111111 : " + a.getDeposit().getAmount());
-        }
-
-    }
 
 }
