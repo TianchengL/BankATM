@@ -21,6 +21,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
     private final JButton loanButton;
     private final JButton makeTransactionButton;
     private final JButton logoutButton;
+    private final JButton stockButton;
     private int customerID;
     private final User user;//current user
 
@@ -35,10 +36,11 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         accountButton = new JButton("Check your accounts");
         checkTransactionButton = new JButton("View transactions");
         profileButton = new JButton("Profile");
-        createAccountButton = new JButton("Create a checkings/savings account");
+        createAccountButton = new JButton("Create a checkings/savings/stock account");
         loanButton = new JButton("Manage Loans");
         makeTransactionButton = new JButton("Make transaction");
         logoutButton = new JButton("Logout");
+        stockButton = new JButton("Stock");
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
@@ -64,6 +66,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         loanButton.setBounds(300, 450, 400, 40);
         makeTransactionButton.setBounds(300, 500, 400, 40);
         logoutButton.setBounds(700, 600, 100, 35);
+        stockButton.setBounds(300,550,400,40);
 
     }
 
@@ -76,6 +79,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         container.add(loanButton);
         container.add(makeTransactionButton);
         container.add(logoutButton);
+        container.add(stockButton);
     }
 
     public void addActionEvent() {
@@ -86,6 +90,7 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         loanButton.addActionListener(this);
         makeTransactionButton.addActionListener(this);
         logoutButton.addActionListener(this);
+        stockButton.addActionListener(this);
     }
 
 
@@ -113,6 +118,9 @@ public class CustomerMainMenuFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == logoutButton) {
             dispose();
+        }
+        if(e.getSource() == stockButton){
+            new StockGUI(user);
         }
     }
 

@@ -1,6 +1,6 @@
 package GUI;
 
-import Account.Account;
+import Account.*;
 import Collection.AccountCollection;
 import Currency.Money;
 import User.User;
@@ -24,7 +24,7 @@ public class Transfer extends JFrame{
 
     public Transfer(User user){
         setContentPane(transferPanel);
-        setTitle("View Accounts Form");
+        setTitle("Transfer");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
@@ -80,11 +80,24 @@ public class Transfer extends JFrame{
                     }
                 }
                 if(outAcc != null && inAcc != null) {
+                    if(inAcc instanceof StockAccount){
+                        if(getAmount()>=1000){
+                            outAcc.transfer(inAcc, getAmount());
+                            AccountCollection.getInstance().saveAccountToCSV(allAccounts);
+                            JOptionPane.showMessageDialog(transferPanel, "Amount transferred!");
+                            dispose();
+                        }else{
+                            JOptionPane.showMessageDialog(transferPanel, "Amount must over 1000!");
+                            dispose();
+                        }
+                    }else{
                     outAcc.transfer(inAcc, getAmount());
                     AccountCollection.getInstance().saveAccountToCSV(allAccounts);
+                    JOptionPane.showMessageDialog(transferPanel, "Amount transferred!");
+                    dispose();
+                    }
                 }
-                JOptionPane.showMessageDialog(transferPanel, "Amount transferred!");
-                dispose();
+
             }
         });
 

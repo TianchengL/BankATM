@@ -40,6 +40,8 @@ public class CreateAccountFrame extends JFrame {
         createAccount.setFont(new Font("Serif", Font.BOLD, 20));
         comboBoxAccountType.addItem(Account.AccountType.CHECKING_ACCOUNT);
         comboBoxAccountType.addItem(Account.AccountType.SAVING_ACCOUNT);
+        comboBoxAccountType.addItem(Account.AccountType.STOCK_ACCOUNT);
+
         comboBoxCurrencyType.addItem(Currency.CurrencyType.CNY);
         comboBoxCurrencyType.addItem(Currency.CurrencyType.KRW);
         comboBoxCurrencyType.addItem(Currency.CurrencyType.USD);
@@ -69,7 +71,25 @@ public class CreateAccountFrame extends JFrame {
                 }
                 else if(getDeposit() < 100.0){
                     JOptionPane.showMessageDialog(createAccountPanel, "Initial Deposit cannot less than 100");
-                }else{
+                }else if(comboBoxCurrencyType.getSelectedItem()== Account.AccountType.STOCK_ACCOUNT){
+                    List<Account> userAccount=AccountCollection.getInstance().getUserAccounts(user.getId());
+                    SavingAccount saving = null;
+                    for(Account account:userAccount){
+                        if(account instanceof SavingAccount){
+                            saving = (SavingAccount) account;
+                        }
+                    }
+                    if(saving.getDeposit().getAmount()>5000){
+                        AccountFactory.createAccount(user.getId(), getDeposit(),
+                                getCurrency(), (Account.AccountType) comboBoxAccountType.getSelectedItem());
+                        AccountCollection.getInstance().saveAccountToCSV(AccountCollection.getInstance().getAccounts());
+                        JOptionPane.showMessageDialog(createAccountPanel, "Account Created!");
+                        dispose();
+
+                    }else{
+                        JOptionPane.showMessageDialog(createAccountPanel, "You must have more than $5000 in your saving account");
+                    }
+                } else{
                     //create new account and add it to collection
                     AccountFactory.createAccount(user.getId(), getDeposit(),
                             getCurrency(), (Account.AccountType) comboBoxAccountType.getSelectedItem());

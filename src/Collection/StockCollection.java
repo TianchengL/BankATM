@@ -82,6 +82,11 @@ public class StockCollection {
         return null;
     }
     public void addStock(Stock stock){
+        for(Stock current:stocks){
+            if(current.getName().equals(stock.getName())){
+                stocks.remove(current);
+            }
+        }
         stocks.add(stock);
     }
 

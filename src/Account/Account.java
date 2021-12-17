@@ -41,6 +41,10 @@ public abstract class Account implements Serializable, TransactionInterface {
         stockOrderHistory = new ArrayList<>();
     }
 
+    public List<Stock> getStockOrderHistory() {
+        return stockOrderHistory;
+    }
+
     public Money getDeposit() {
         return deposit;
     }
@@ -162,33 +166,7 @@ public abstract class Account implements Serializable, TransactionInterface {
         return true;
     }
 
-    public boolean buyStock(String stockName,int amount){
-       Stock stock = StockCollection.getInstance().findStockByName(stockName);
-       double cost =amount*stock.getPrice();
-       if(deposit.getAmount()>=cost){
-           withdraw(cost,true,"Buy stocks: "+stockName+" amount:"+amount);
-           stockOrderHistory.add(new Stock(stock.getName(),stock.getPrice(),amount));
-           return true;
-       }
-        return false;
-    }
 
-    public boolean sellStock(String stockName,int amount){
-
-        for(Stock stock:stockOrderHistory){
-            if(stock.getName().equals(stockName)){
-                Stock presentStock = StockCollection.getInstance().findStockByName(stockName);
-                double income = presentStock.getPrice()*amount;
-                if(stock.isSold==false&&stock.getAmount()>=amount){
-                    deposit(income,currency,true,"Sell stocks:"+ stockName+ " amount:"+amount);
-                    stock.deductAmount(amount);
-                    stock.setSold();
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
 
 }

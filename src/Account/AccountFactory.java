@@ -26,6 +26,9 @@ public class AccountFactory {
         }else if(accountType == Account.AccountType.SAVING_ACCOUNT){
             account = new SavingAccount(accountId, currency, date, money, user);
             AccountCollection.getInstance().addAccount(account);
+        }else if(accountType == Account.AccountType.STOCK_ACCOUNT){
+            account = new StockAccount(accountId, currency, date, money, user);
+            AccountCollection.getInstance().addAccount(account);
         }
 
         return account;
