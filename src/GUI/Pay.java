@@ -71,23 +71,28 @@ public class Pay extends JFrame{
                 if(receiver.getText().isEmpty()){
                     JOptionPane.showMessageDialog(PayPanel, "Please enter the receiver ID");
                 }
-                if(amount.getText().isEmpty()){
+                else if(amount.getText().isEmpty()){
                     JOptionPane.showMessageDialog(PayPanel, "Please enter the deposit amount");
                 }
-                List<Account> accounts = AccountCollection.getInstance().getAccounts();
-                for(Account account: accounts){
-                    if(Objects.equals(account.getId().toString().substring(0,8), accountsList.getSelectedItem().toString())){
-
-                        account.transferTo(getReceiver(),getamount(), accounts);
-                        AccountCollection.getInstance().saveAccountToCSV(accounts);
-                        break;
-                    }
+                else if(Integer.parseInt(receiver.getText().toString()) > AccountCollection.getInstance().getAccounts().size() || Integer.parseInt(receiver.getText().toString()) < 0){
+                    JOptionPane.showMessageDialog(PayPanel, "User index out of range");
                 }
+                else {
+                    List<Account> accounts = AccountCollection.getInstance().getAccounts();
+                    for (Account account : accounts) {
+                        if (Objects.equals(account.getId().toString().substring(0, 8), accountsList.getSelectedItem().toString())) {
+
+                            account.transferTo(getReceiver(), getamount(), accounts);
+                            AccountCollection.getInstance().saveAccountToCSV(accounts);
+                            break;
+                        }
+                    }
 
 //                Account account = AccountCollection.getInstance().getAccountById(accountsList.getSelectedItem().toString());
 //                account.transferTo(getReceiver(),getamount());
-                JOptionPane.showMessageDialog(PayPanel, "Amount paid!");
-                dispose();
+                    JOptionPane.showMessageDialog(PayPanel, "Amount paid!");
+                    dispose();
+                }
             }
         });
     }
