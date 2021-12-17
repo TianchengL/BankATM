@@ -21,6 +21,8 @@ public class AccountFactory {
         Account account = null;
         if(accountType == Account.AccountType.CHECKING_ACCOUNT){
             account = new CheckingAccount(accountId, currency, date, money, user);
+            account.withdraw(5, false, "Account creation fee");
+            BankManager.addProfit(5.0);
             //add accounts to collection
             AccountCollection.getInstance().addAccount(account);
         }else if(accountType == Account.AccountType.SAVING_ACCOUNT){

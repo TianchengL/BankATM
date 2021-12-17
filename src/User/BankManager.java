@@ -1,6 +1,9 @@
 package User;
 
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class BankManager extends User {
     private static Double profit;
 
@@ -14,6 +17,14 @@ public class BankManager extends User {
 
     public static void addProfit(Double profit) {
         BankManager.profit += profit;
+        try {
+            FileWriter myWriter = new FileWriter("src/Data/bankProfit.txt");
+            System.out.println(BankManager.getProfit());
+            myWriter.write("" + profit);
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public BankManager(String firstname, String lastname, String username) {
